@@ -1,0 +1,30 @@
+.total-table-container {
+    width: 100%;
+    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 1px solid #e0daff;
+    margin-top: 1rem;
+    table {
+        width: 100%;
+    }
+    tbody tr,
+    tfoot tr {
+        border-bottom: 1px solid rgba(var(--app-primary-rgb), 5%);
+    }
+    th,
+    td {
+        border-bottom: 0;
+        text-align: left;
+        padding: 10px 10px;
+        padding-right: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    th {
+        letter-spacing: 0.02rem;
+        white-space: nowrap;
+        background-color: var(--app-primary-color);
+        color: #ffffff;
+    }
+}

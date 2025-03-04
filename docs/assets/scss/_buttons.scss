@@ -1,0 +1,439 @@
+:root {
+    --add-button-color: var(--app-primary-color);
+    --save-button-color: var(--app-primary-color);
+    --update-button-color: var(--app-primary-color);
+    --delete-button-color: #fa896b;
+    --cancel-button-color: #fa896b;
+    --close-button-color: #66615b;
+}
+
+$button-radius: 4px;
+
+@mixin button-common {
+    display: block;
+    position: relative;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    transition: all 0.5s ease-in-out;
+    padding: 6px 16px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    min-width: 100px;
+    border-radius: 4px;
+    outline: none !important;
+    box-shadow: none;
+
+    .hover-text {
+        padding-left: 8px;
+        display: none;
+    }
+
+    .spinner-border {
+        height: 1.25rem;
+        width: 1.25rem;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        display: none;
+    }
+}
+
+@mixin button-border-background($color, $radius: 0) {
+    background-color: $color;
+    border-color: $color;
+
+    // @if $radius != 0 {
+    //     border-radius: $radius;
+    // }
+    &:not([disabled]):hover {
+        // box-shadow: 0 0 10px $color;
+        // transform: translateY(-2px);
+        color: #fff;
+        box-shadow: 0 8px 25px -8px $color;
+    }
+}
+
+@mixin button-border-outline($color) {
+    background-color: transparent;
+    border-color: $color;
+    border-width: 2px;
+    // font-weight: 500;
+    color: $color;
+
+    &:not([disabled]):hover {
+        box-shadow: 0 8px 25px -8px $color;
+        background-color: $color;
+        color: #fff;
+    }
+}
+
+.all-button {
+    @include button-common;
+    /* for fill*/
+    @include button-border-background(var(--app-button-color));
+
+    &.outline {
+        /* for out-line*/
+        @include button-border-outline(var(--app-button-color));
+    }
+
+    &.loader {
+        padding-right: 3rem;
+
+        .spinner-border {
+            display: inline-block;
+        }
+    }
+}
+
+.all-filter-icon-button {
+    height: 38px;
+    width: 50px;
+    // padding: 6px 16px;
+    font-size: 1rem;
+    // line-height: 1.5;
+    background-color: transparent;
+    color: var(--app-primary-color);
+    border: 2px solid var(--app-primary-color);
+    // border-color: var(--filter-button-color);
+    // border-width: 2px;
+    transition: all 0.5s ease-in-out;
+    border-radius: 4px;
+    outline: none !important;
+    box-shadow: none;
+
+    img {
+        height: 32px;
+        width: auto;
+    }
+
+    &.button-loader {
+        position: relative;
+        pointer-events: none;
+
+        span,
+        img {
+            display: none;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 12px;
+            top: 7px;
+            vertical-align: text-bottom;
+            // border: .25em solid currentColor;
+            border: 3px solid var(--app-primary-color);
+            border-right-color: transparent;
+            border-radius: 50%;
+            -webkit-animation: spinner-border 0.75s linear infinite;
+            animation: spinner-border 0.75s linear infinite;
+        }
+    }
+}
+
+.action-icon-button {
+    display: inline-block;
+    padding: 0.5rem 0.5rem;
+    // border: 1px solid #ccc;
+    border-radius: 0.25rem;
+
+    &.edit-icon {
+        color: #45a049;
+        border-color: #45a049;
+        background-color: rgba(69, 160, 73, 0.1);
+        margin-right: 0.5rem;
+    }
+
+    &.delete-icon {
+        color: #fa636a;
+        border-color: #fa636a;
+        background-color: rgba(250, 99, 106, 0.1);
+    }
+}
+
+.btn-warning {
+    background-color: var(--app-button-color);
+    color: var(--app-font-color);
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+.btn-outline-warning {
+    background-color: white;
+    color: #fe9a2d;
+    border: 1px solid #fe9a2d;
+    border-radius: 5px;
+}
+
+.btn-outline-warning:hover {
+    background-color: white;
+    color: #fe9a2d;
+    border: 1px solid #fe9a2d;
+    border-radius: 5px;
+}
+
+.all-add-button,
+.all-save-button,
+.all-update-button,
+.all-delete-button,
+.all-cancel-button,
+.all-close-button,
+.all-back-button,
+.all-white-button {
+    @include button-common;
+}
+
+.all-add-button {
+    /* for fill*/
+    @include button-border-background(var(--add-button-color));
+
+    &.outline {
+        /* for out-line*/
+        @include button-border-outline(var(--add-button-color));
+    }
+
+    /* for gradient */
+}
+
+.all-save-button {
+    /* for fill*/
+    @include button-border-background(var(--save-button-color));
+
+    &.outline {
+        /* for out-line*/
+        @include button-border-outline(var(--save-button-color));
+    }
+}
+
+.all-update-button {
+    /* for fill*/
+    @include button-border-background(var(--update-button-color));
+
+    &.outline {
+        /* for out-line*/
+        @include button-border-outline(var(--update-button-color));
+    }
+}
+
+.all-delete-button {
+    /* for fill*/
+    @include button-border-background(var(--delete-button-color));
+
+    &.outline {
+        /* for out-line*/
+        @include button-border-outline(var(--delete-button-color));
+    }
+}
+
+.all-cancel-button {
+    /* for fill*/
+    @include button-border-background(var(--cancel-button-color));
+
+    &.outline {
+        /* for out-line*/
+        @include button-border-outline(var(--cancel-button-color));
+    }
+}
+
+.all-close-button {
+    /* for fill*/
+    @include button-border-background(var(--close-button-color));
+
+    &.outline {
+        /* for out-line*/
+        @include button-border-outline(var(--close-button-color));
+    }
+}
+
+.all-white-button {
+    background-color: transparent;
+    border-color: #fff;
+    border-width: 2px;
+    // font-weight: 500;
+    color: #fff;
+
+    &:not([disabled]):hover {
+        // box-shadow: 0 8px 25px -8px #fff;
+        background-color: #fff;
+        color: #17343a;
+    }
+}
+
+.all-back-button {
+    color: var(--back-button-color);
+    transition: all 0.25s linear;
+
+    /* for out-line*/
+    // @include button-border-outline(var(--back-button-color));
+
+    /* for fill*/
+    // @include button-border-background(var(--back-button-color));
+
+    /* for gradient */
+
+    &:hover {
+        background-color: transparent;
+        border-color: var(--back-button-color);
+        border-width: 2px;
+
+        .hover-text {
+            display: initial;
+        }
+
+        // @include button-border-outline(var(--back-button-color));
+    }
+}
+
+.all-filter-icon-button {
+    height: 38px;
+    width: 50px;
+    // padding: 6px 16px;
+    font-size: 1rem;
+    // line-height: 1.5;
+    background-color: transparent;
+    color: var(--filter-button-color);
+    border: 2px solid var(--filter-button-color);
+    // border-color: var(--filter-button-color);
+    // border-width: 2px;
+    transition: all 0.5s ease-in-out;
+    border-radius: $button-radius;
+    outline: none !important;
+    box-shadow: none;
+
+    img {
+        height: 32px;
+        width: auto;
+    }
+
+    &.button-loader {
+        position: relative;
+        pointer-events: none;
+
+        span,
+        img {
+            display: none;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 12px;
+            top: 7px;
+            vertical-align: text-bottom;
+            // border: .25em solid currentColor;
+            border: 3px solid var(--filter-button-color);
+            border-right-color: transparent;
+            border-radius: 50%;
+            -webkit-animation: spinner-border 0.75s linear infinite;
+            animation: spinner-border 0.75s linear infinite;
+        }
+    }
+}
+
+.all-cancel-outline-button {
+    @include button-common;
+    @include button-border-outline(var(--bs-danger));
+}
+
+.all-highlight-button {
+    @include button-common;
+    /* for out-line*/
+    @include button-border-outline(var(--app-highlight-color));
+
+    &.fill {
+        color: #fff;
+        @include button-border-background(var(--app-highlight-color));
+    }
+}
+
+/* Ripple effect */
+.button-active-ripple {
+    background-position: center;
+    transition: all 0.3s;
+}
+
+.button-active-ripple:hover {
+    background: #eeeeee radial-gradient(circle, transparent 1%, #eeeeee 1%) center/15000%;
+}
+
+.button-active-ripple:active {
+    background-color: #bdbdbd;
+    background-size: 100%;
+    transition: all 0s;
+}
+
+/* ================================= */
+/*            for loader             */
+/* ================================= */
+.form-button-container.button-loader-right,
+.form-button-container.button-loader-left {
+
+    .all-add-button,
+    .all-save-button,
+    .all-update-button,
+    .all-delete-button,
+    .all-cancel-button,
+    .all-close-button,
+    .all-back-button,
+    .all-highlight-button {
+        position: relative;
+        pointer-events: none;
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 8px;
+            top: 8px;
+            vertical-align: text-bottom;
+            // border: .25em solid currentColor;
+            border: 3px solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            -webkit-animation: spinner-border 0.75s linear infinite;
+            animation: spinner-border 0.75s linear infinite;
+        }
+    }
+}
+
+.form-button-container.button-loader-right {
+
+    .all-add-button,
+    .all-save-button,
+    .all-update-button,
+    .all-delete-button,
+    .all-cancel-button,
+    .all-close-button,
+    .all-back-button,
+    .all-highlight-button {
+        padding-right: 40px;
+    }
+}
+
+.form-button-container.button-loader-left {
+
+    .all-add-button,
+    .all-save-button,
+    .all-update-button,
+    .all-delete-button,
+    .all-cancel-button,
+    .all-close-button,
+    .all-back-button,
+    .all-highlight-button {
+        padding-left: 40px;
+    }
+}
