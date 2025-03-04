@@ -1,0 +1,15 @@
+<div class="app-wrapper">
+    <div class="global-container">
+        
+        <!-- Toolbar -->
+        <div class="app-nav-tool-bar" *ngIf="isShowLayout">
+            <app-navbar></app-navbar>
+        </div>
+
+        <!-- Main Container -->
+        <div class="app-main-container">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+

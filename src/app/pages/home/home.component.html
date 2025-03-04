@@ -1,0 +1,288 @@
+<div class="breadcrumb-container">
+  <div class="breadcrumb-bar">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item" aria-current="page">Home</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="aside-container"></div>
+</div>
+
+<div class="document-main-container">
+  <div class="form-container">
+    <div class="row">
+      
+      <div class="col-md-3">
+        <a class="home-card-container" [routerLink]="'/grn'">
+          <div class="home-card-image-container">
+            <div class="image-container">
+              <img src="../../../assets/icons/home/inward_icon.png" alt="">
+            </div>
+            <div class="title-container">
+              <span>Inward</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-3">
+        <a class="home-card-container" [routerLink]="'/putaway'">
+          <div class="home-card-image-container">
+            <div class="image-container">
+              <img src="../../../assets/icons/home/putaway_icon.png" alt="">
+            </div>
+            <div class="title-container">
+              <span>Putaway</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-3">
+        <a class="home-card-container" [routerLink]="'/picking'">
+          <div class="home-card-image-container">
+            <div class="image-container">
+              <img src="../../../assets/icons/home/picking_icon.png" alt="">
+            </div>
+            <div class="title-container">
+              <span>Picking</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-3">
+        <a class="home-card-container" [routerLink]="'/dispatch'">
+          <div class="home-card-image-container">
+            <div class="image-container">
+              <img src="../../../assets/icons/home/dispatch_icon.png" alt="">
+            </div>
+            <div class="title-container">
+              <span>Dispatch</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-3">
+        <a class="home-card-container" [routerLink]="'/inventory'">
+          <div class="home-card-image-container">
+            <div class="image-container small">
+              <img src="../../../assets/icons/home/inventory_icon.png" alt="">
+            </div>
+            <div class="title-container">
+              <span>Inventory</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-3">
+        <a class="home-card-container" [routerLink]="'/material-master'">
+          <div class="home-card-image-container">
+            <div class="image-container small">
+              <img src="../../../assets/icons/home/material_icon.png" alt="">
+            </div>
+            <div class="title-container">
+              <span>Material</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-3">
+        <a class="home-card-container" [routerLink]="'/warehouse-master'">
+          <div class="home-card-image-container">
+            <div class="image-container small">
+              <img src="../../../assets/icons/home/warehouse_icon.png" alt="">
+            </div>
+            <div class="title-container">
+              <span>Warehouse</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-3">
+        <a class="home-card-container" [routerLink]="'/employee-master'">
+          <div class="home-card-image-container">
+            <div class="image-container small">
+              <img src="../../../assets/icons/home/employee_icon.png" alt="">
+            </div>
+            <div class="title-container">
+              <span>Employee</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-3">
+        <a class="home-card-container" [routerLink]="'/organization'">
+          <div class="home-card-image-container">
+            <div class="image-container small">
+              <img src="../../../assets/icons/home/organization_icon.png" alt="">
+            </div>
+            <div class="title-container">
+              <span>Organization</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- <div class="col-md-3">
+        <a class="home-card-container" [routerLink]="'/cargo-inward'">
+          <div class="home-card-image-container">
+            <div class="image-container small">
+              <img src="../../../assets/icons/warehouse.svg" alt="">
+            </div>
+            <div class="title-container">
+              <span>Cargo</span>
+            </div>
+          </div>
+        </a>
+      </div> -->
+
+    </div>
+  </div>
+</div>
+
+<!-- <section class="p-3">
+  <div class="row gx-3 gy-3 ">
+    <div class="col-md-3">
+      <a class="text-decoration-none" routerLink="/grn">
+        <div class="card card1 ">
+          <div class="card-body d-flex justify-content-center align-items-center">
+            <div class="text-center">
+              <img src="../../../assets/icons/receive.png" alt="">
+              <h5 class="text-dark text-center">Inward</h5>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a class="text-decoration-none" routerLink="/putaway">
+        <div class="card card1 ">
+          <div class="card-body d-flex justify-content-center align-items-center">
+            <div class="text-center">
+              <img src="../../../assets/icons/putaway.svg" alt="">
+              <h5 class="text-dark text-center">Putaway</h5>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a class="text-decoration-none" routerLink="/picking">
+        <div class="card card1 ">
+          <div class="card-body d-flex justify-content-center align-items-center">
+            <div class="text-center">
+              <img src="../../../assets/icons/picking.png" alt="">
+              <h5 class="text-dark text-center">Picking</h5>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a class="text-decoration-none" routerLink="/dispatch">
+        <div class="card card1 ">
+          <div class="card-body d-flex justify-content-center align-items-center">
+            <div class="text-center">
+              <img src="../../../assets/icons/move.png" alt="">
+              <h5 class="text-dark text-center">Dispatch</h5>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-3">
+      <a class="text-decoration-none" routerLink="/inventory">
+        <div class="card card1 ">
+          <div class="card-body d-flex justify-content-center align-items-center">
+            <div class="text-center">
+              <img src="../../../assets/icons/inventory.svg" alt="">
+              <h5 class="text-dark text-center">Inventory</h5>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-3">
+      <a class="text-decoration-none" routerLink="/organization">
+        <div class="card card1 ">
+          <div class="card-body d-flex justify-content-center align-items-center">
+            <div>
+              <img src="../../../assets/icons/receive.png" alt="">
+              <h5 class="text-dark text-center">Organization</h5>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a class="text-decoration-none" routerLink="/material-master">
+        <div class="card card1 ">
+          <div class="card-body d-flex justify-content-center align-items-center text-center">
+            <div>
+              <img src="../../../assets/icons/mastermaterila.svg" alt="">
+              <h5 class="text-dark text-center ">Material Master </h5>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a class="text-decoration-none" routerLink="/employee-master">
+        <div class="card card1 ">
+          <div class="card-body d-flex justify-content-center align-items-center text-center">
+            <div>
+              <img src="../../../assets/icons/employeemaster.svg" alt="">
+              <h5 class="text-dark text-center ">Employee Master </h5>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a class="text-decoration-none" routerLink="/warehouse-master">
+        <div class="card card1 ">
+          <div class="card-body d-flex justify-content-center align-items-center text-center">
+            <div>
+              <img src="../../../assets/icons/warehouse.svg" alt="">
+              <h5 class="text-dark text-center ">Warehouse Master </h5>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a class="text-decoration-none" routerLink="/label-printer">
+        <div class="card card1 ">
+          <div class="card-body d-flex justify-content-center align-items-center text-center">
+            <div>
+              <img src="../../../assets/icons/warehouse.svg" alt="">
+              <h5 class="text-dark text-center ">Label Printer </h5>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a class="text-decoration-none" routerLink="/tax-master">
+        <div class="card card1 ">
+          <div class="card-body d-flex justify-content-center align-items-center text-center">
+            <div>
+              <img src="../../../assets/icons/warehouse.svg" alt="">
+              <h5 class="text-dark text-center ">Tax Master </h5>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</section> -->

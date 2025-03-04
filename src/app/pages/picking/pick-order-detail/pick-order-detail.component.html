@@ -1,0 +1,187 @@
+<div class="breadcrumb-container">
+    <div class="breadcrumb-bar">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item active" aria-current="page">
+                    <a [routerLink]="'/picking'">Pick Order</a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page">Detail</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="aside-container"></div>
+</div>
+
+<div class="document-main-container">
+    <div class="form-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4 form-group form-field-group">
+                        <label>
+                            <span>Sale Order Number</span>
+                            <span class="required-field">*</span>
+                        </label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListOrderDetail.Sale_Order_Number" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group form-field-group">
+                        <label><span>Sale Order Date</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListOrderDetail.Sale_Order_Date" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group form-field-group">
+                        <label>
+                            <span>Delivery Date</span>
+                            <span class="required-field">*</span>
+                        </label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListOrderDetail.Delivery_Date" />
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-3 form-group form-field-group">
+                        <label><span>Purchase Order Date</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListOrderDetail.Purchase_Order_Date" />
+                        </div>
+                    </div> -->
+                    <div class="col-md-4 form-group form-field-group">
+                        <label><span>Customer</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListOrderDetail.Customer_Name" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group form-field-group">
+                        <label><span>Warehouse</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListOrderDetail.Warehouse_Name" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group form-field-group">
+                        <label><span>Warehouse Address</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListOrderDetail.Warehouse_Address" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="page-sub-header justify-content-between">
+                    <span class="title">Products</span>
+
+                    <div class="assign-container mb-2">
+                        <div class="input-field-container position-relative">
+                            <label class="floating-label">Employee</label>
+                            <div class="all-select-comp-container">
+                                <app-all-mark-select [data]="employeeDropdown" [isClear]="false"
+                                    [(allMarkModel)]="selectedEmployee" [required]="isValidate">
+                                </app-all-mark-select>
+                            </div>
+                        </div>
+                        <div class="ms-2">
+                            <button class="all-button" (click)="onAssignEmployee()">Assign</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="total-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="isAllProduct"
+                                        (ngModelChange)="isAllChange($event)" />
+                                </th>
+                                <th>S.No</th>
+                                <th>Material Code</th>
+                                <th>Material Name</th>
+                                <th>Part Number</th>
+                                <th>HSN Code</th>
+                                <!-- <th>Base Price</th>
+                                <th>Discount</th>
+                                <th>Unit Price</th>
+                                <th>Unit Tax</th>
+                                <th>Purchase Price</th> -->
+                                <th>Quantity</th>
+                                <!-- <th>SGST</th>
+                                <th>CGST</th>
+                                <th>IGST</th>
+                                <th>Total</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of pickListOrderDetail.Picklist_Product_Master;let i=index;">
+                                <td>
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="product.isSelected" />
+                                </td>
+                                <td><span [innerHtml]="i+1"></span></td>
+                                <td><span [innerHtml]="product.Material_Code"></span></td>
+                                <td><span [innerHtml]="product.Material_Name"></span></td>
+                                <td><span [innerHtml]="product.Part_Number"></span></td>
+                                <td><span [innerHtml]="product.HSN_Code"></span></td>
+                                <!-- <td class="text-end"><span [innerHtml]="product.Base_Price"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Discount_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Unit_Price"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Unit_Tax_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Sell_Price"></span></td> -->
+                                <td><span [innerHtml]="product.Quantity"></span></td>
+                                <!-- <td class="text-end"><span [innerHtml]="product.SGST_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.CGST_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.IGST_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Total_Price"></span></td> -->
+                            </tr>
+                        </tbody>
+                        <!-- <tfoot>
+                            <tr>
+                                <td colspan="15" class="text-end">Subtotal</td>
+                                <td class="text-end"><span [innerHtml]="pickListOrderDetail.Sub_Total"></span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="15" class="text-end">Roundoff</td>
+                                <td class="text-end"><span [innerHtml]="pickListOrderDetail.Rounding_Off"></span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="15" class="text-end">Total</td>
+                                <td class="text-end"><span [innerHtml]="pickListOrderDetail.Grand_Total"></span></td>
+                            </tr>
+                        </tfoot> -->
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <div class="row  mt-4">
+                    <div class="col-md-6 form-group form-field-group">
+                        <label>Terms and Condition</label>
+                        <div class="form-input-field">
+                            <textarea class="form-control" cols="30" rows="3"
+                                [(ngModel)]="pickListOrderDetail.Terms_Condition"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group form-field-group">
+                        <label>Remarks</label>
+                        <div class="form-input-field">
+                            <textarea class="form-control" cols="30" rows="3"
+                                [(ngModel)]="pickListOrderDetail.Remarks"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

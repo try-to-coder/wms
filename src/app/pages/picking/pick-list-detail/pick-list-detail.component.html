@@ -1,0 +1,201 @@
+<div class="breadcrumb-container">
+    <div class="breadcrumb-bar">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item active" aria-current="page">
+                    <a [routerLink]="'/picking'">Picking</a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page">Detail</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="aside-container"></div>
+</div>
+
+<div class="document-main-container">
+    <div class="form-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4 form-group form-field-group">
+                        <label>
+                            <span>PickList Number</span>
+                            <span class="required-field">*</span>
+                        </label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListDetail.Picklist_Number" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group form-field-group">
+                        <label><span>PickList Date</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListDetail.Picklist_Date" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group form-field-group">
+                        <label>
+                            <span>Delivery Date</span>
+                            <span class="required-field">*</span>
+                        </label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListDetail.Delivery_Date" />
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-3 form-group form-field-group">
+                        <label><span>Purchase Order Date</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListDetail.Purchase_Order_Date" />
+                        </div>
+                    </div> -->
+                    <div class="col-md-4 form-group form-field-group">
+                        <label><span>Customer</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListDetail.Customer_Name" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group form-field-group">
+                        <label><span>Warehouse</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListDetail.Warehouse_Name" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group form-field-group">
+                        <label><span>Warehouse Address</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="pickListDetail.Warehouse_Address" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="page-sub-header justify-content-between">
+                    <span class="title">Products</span>
+                    <div class="ms-2">
+                        <button class="all-button" (click)="startPicking()">Start Picking</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="total-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="isAllProduct"
+                                        (ngModelChange)="isAllChange($event)" />
+                                </th>
+                                <th>S.No</th>
+                                <th>Material</th>
+                                <th>Part Number</th>
+                                <th>HSN Code</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Picked</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of pickingProducts; let i=index;">
+                                <td>
+                                    <div>
+                                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel"
+                                            value="" aria-label="..." [(ngModel)]="product.isSelected">
+                                    </div>
+                                </td>
+                                <td [innerHtml]="i+1"></td>
+                                <td>
+                                    <span
+                                        [innerHtml]="(product.Material_Code || '') + ' '+ (product.Material_Name || '')"></span>
+                                </td>
+                                <td>
+                                    <span [innerHtml]="product.Part_Number || '-'"></span>
+                                </td>
+                                <td>
+                                    <span [innerHtml]="product.HSN_Code || '-'"></span>
+                                </td>
+                                <td class="text-center">
+                                    <span [innerHtml]="product.Available_Quantity || '-'"></span>
+                                </td>
+                                <td class="text-center">
+                                    <span [innerHtml]="product.Picking_Quantity || '-'"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr *ngFor="let product of pickedProducts; let i=index;">
+                                <td>
+                                    <span class="text-success">Picked</span>
+                                </td>
+                                <td [innerHtml]="i+1"></td>
+                                <td>
+                                    <span
+                                        [innerHtml]="(product.Material_Code || '') + ' '+ (product.Material_Name || '')"></span>
+                                </td>
+                                <td>
+                                    <span [innerHtml]="product.Part_Number || '-'"></span>
+                                </td>
+                                <td>
+                                    <span [innerHtml]="product.HSN_Code || '-'"></span>
+                                </td>
+                                <td class="text-center">
+                                    <span [innerHtml]="product.Available_Quantity || '-'"></span>
+                                </td>
+                                <td class="text-center">
+                                    <span [innerHtml]="product.Picking_Quantity || '-'"></span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <div class="row  mt-4">
+                    <div class="col-md-6 form-group form-field-group">
+                        <label>Terms and Condition</label>
+                        <div class="form-input-field">
+                            <textarea class="form-control" cols="30" rows="3"
+                                [(ngModel)]="pickListDetail.Terms_Condition"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group form-field-group">
+                        <label>Remarks</label>
+                        <div class="form-input-field">
+                            <textarea class="form-control" cols="30" rows="3"
+                                [(ngModel)]="pickListDetail.Remarks"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- ---------------------------- -->
+<!--      Start Picklist Modal     -->
+<!-- ---------------------------- -->
+
+<!-- Modal -->
+<div class="modal fade" id="pickingListModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="putawayGenerateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <app-pick-list-modal [data]="pickingModal" (toggleEvent)="closePickListModal()"></app-pick-list-modal>
+    </div>
+</div>
+
+<div class="d-none">
+    <button id="pick-list-master-open-modal" data-bs-toggle="modal" data-bs-target="#pickingListModal"></button>
+    <button id="pick-list-master-close-modal" data-bs-target="#pickingListModal" data-bs-dismiss="modal"
+        aria-label="Close"></button>
+</div>

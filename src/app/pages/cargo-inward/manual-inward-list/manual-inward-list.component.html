@@ -1,0 +1,70 @@
+<div class="breadcrumb-container">
+    <div class="breadcrumb-bar">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item active" aria-current="page">Inward</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="aside-container d-flex">
+        <button class="all-button me-3" (click)="onOutward()">
+            <span>Outward</span>
+        </button>
+        <button class="all-button me-3" (click)="onInward()">
+            <span>Inward</span>
+        </button>
+        <button class="all-button outline" (click)="onImport()">
+            <span>Import</span>
+        </button>
+    </div>
+</div>
+
+
+<div class="document-main-container">
+    <div class="form-container">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="data-table-scroll-container" [class.table-spinner]="!isTableDataRetrieved"
+                    [class.hide-when-no-data]="tableList?.length == 0">
+
+                    <!-- Loader -->
+                    <div class="table-spinner-container">
+                        <div class="spinner-border text-success" role="status">
+                            <!-- <span class="sr-only">Loading...</span> -->
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                        <thead>
+                            <tr *ngFor="let grn of tableList | slice:0:1">
+                                <th *ngFor="let jObject of grn | keyvalue: originalOrder; let i=index">
+                                    <ng-container>{{removeUS(jObject.key)}}</ng-container>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let grn of tableList; let i=index;" (click)="onTableRowClick(grn)">
+                                <td *ngFor="let jObject of grn | keyvalue: originalOrder;">
+                                    <ng-container>{{jObject.value}}</ng-container>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <!-- No data found -->
+                <div *ngIf="tableList?.length == 0 && isTableDataRetrieved" class="no-record-found-container">
+                    <div class="no-record-found-img-div">
+                        <img src="../../../assets/images/no-data-found.png" alt="No data found" title="No data found">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

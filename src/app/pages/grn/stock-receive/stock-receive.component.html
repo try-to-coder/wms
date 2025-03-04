@@ -1,0 +1,370 @@
+<div class="breadcrumb-container">
+    <div class="breadcrumb-bar">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item active p-2 " aria-current="page">
+                    <a [routerLink]="'/grn'">GRN</a>
+                </li>
+                <li class="breadcrumb-item p-2 " aria-current="page">Stock Receive</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="aside-container d-flex gap-2">
+        <button class="all-back-button" type="button" (click)="navigateBack()">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-back-up" width="24"
+                height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round"
+                strokeLinejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M9 14l-4 -4l4 -4" />
+                <path d="M5 10h11a4 4 0 1 1 0 8h-1" />
+              </svg>
+            </span>
+            <span class="hover-text">Back</span>
+          </button>
+        <button class="all-button" (click)="printNewPDF()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-printer" width="20" height="20"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" />
+                <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" />
+                <rect x="7" y="13" width="10" height="8" rx="2" />
+            </svg>
+            <span class="ms-2">Print PDF</span>
+        </button>
+        <button class="all-button" (click)="onPrintBarcodeClick()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-printer" width="20" height="20"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" />
+                <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" />
+                <rect x="7" y="13" width="10" height="8" rx="2" />
+            </svg>
+            <span class="ms-2">Print Barcode</span>
+        </button>
+    </div>
+</div>
+
+<div class="document-main-container">
+    <div class="form-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3 form-group form-field-group">
+                        <label>
+                            <span>Stock Receive Number</span>
+                            <span class="required-field">*</span>
+                        </label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="stockReceiveDetail.Stock_Receive_Number" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group form-field-group">
+                        <label>
+                            <span>Stock Receive Date</span>
+                            <span class="required-field">*</span>
+                        </label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="stockReceiveDetail.Stock_Receive_Date" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group form-field-group">
+                        <label><span>Reference Number</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="stockReceiveDetail.Reference_Number" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group form-field-group">
+                        <label><span>Reference Date</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="stockReceiveDetail.Reference_Date" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group form-field-group">
+                        <label><span>Status</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="stockReceiveDetail.Stock_Receive_Status" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group form-field-group">
+                        <label><span>Warehouse</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="stockReceiveDetail.Warehouse_Name" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group form-field-group">
+                        <label><span>Warehouse Address</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="stockReceiveDetail.Warehouse_Address" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="page-sub-header">
+                    <span class="title">Products</span>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="total-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Material Code</th>
+                                <th>Material Name</th>
+                                <th>Part Number</th>
+                                <th>HSN Code</th>
+                                <!-- <th>Base Price</th>
+                                <th>Discount</th>
+                                <th>Unit Price</th>
+                                <th>Unit Tax</th>
+                                <th>Purchase Price</th> -->
+                                <th>Quantity</th>
+                                <!-- <th>SGST</th>
+                                <th>CGST</th>
+                                <th>IGST</th>
+                                <th>Total</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of stockReceiveDetail.Stock_Receive_Products;let i=index;">
+                                <td><span [innerHtml]="i+1"></span></td>
+                                <td><span [innerHtml]="product.Material_Code"></span></td>
+                                <td><span [innerHtml]="product.Material_Name"></span></td>
+                                <td><span [innerHtml]="product.Part_Number"></span></td>
+                                <td><span [innerHtml]="product.HSN_Code"></span></td>
+                                <!-- <td class="text-end"><span [innerHtml]="product.Base_Price"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Discount_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Unit_Price"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Unit_Tax_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Sell_Price"></span></td> -->
+                                <td><span [innerHtml]="product.Quantity"></span></td>
+                                <!-- <td class="text-end"><span [innerHtml]="product.SGST_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.CGST_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.IGST_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Total_Price"></span></td> -->
+                            </tr>
+                        </tbody>
+                        <!-- <tfoot>
+                            <tr>
+                                <td colspan="14" class="text-end">Subtotal</td>
+                                <td class="text-end"><span [innerHtml]="stockReceiveDetail.Sub_Total"></span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="14" class="text-end">Charges</td>
+                                <td class="text-end"><span
+                                        [innerHtml]="stockReceiveDetail.Order_Total_Charge_With_Tax"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="14" class="text-end">Roundoff</td>
+                                <td class="text-end"><span [innerHtml]="stockReceiveDetail.Rounding_Off"></span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="14" class="text-end">Total</td>
+                                <td class="text-end"><span [innerHtml]="stockReceiveDetail.Grand_Total"></span></td>
+                            </tr>
+                        </tfoot> -->
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="row mt-4">
+                    <div class="col-md-6 form-group form-field-group">
+                        <label>Terms and Condition</label>
+                        <div class="form-input-field">
+                            <textarea class="form-control" cols="30" rows="3"
+                                [(ngModel)]="stockReceiveDetail.Terms_Condition"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group form-field-group">
+                        <label>Remarks</label>
+                        <div class="form-input-field">
+                            <textarea class="form-control" cols="30" rows="3"
+                                [(ngModel)]="stockReceiveDetail.Remarks"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<iframe id="receipt-printer-a4-iframe" name="receipt-printer-a4-iframe" class="iframe-print-container"
+    style="display: none;">
+</iframe>
+
+<div style="display: none;">
+    <div id="delivery-challan-print-container" class="print-container">
+        <header>
+            <table>
+                <thead>
+                    <tr class="vertical-center">
+                        <td colspan="4" style="text-align: center;vertical-align: middle;padding: 1rem;">
+                            <span class="header-label">Stock Recetive Detail</span>
+                           
+                        </td>
+                        <!-- <td colspan="2" style="text-align: end;vertical-align: middle;" class="header-image">
+                            <img [src]="image" class="image" alt="">
+                        </td> -->
+                    </tr>
+                    <tr class="vertical-center " >
+                        <td colspan="2" style="text-align: start;vertical-align: middle ;padding: 1rem .2rem; ">
+                         
+                          <div class="inner-header">
+                            <div  class="inner-body">Stock Receive Number :</div>
+                            <div class="heading" [innerHTML]="stockReceiveDetail.Stock_Receive_Number || '-'"></div>
+                          </div>
+                          <div class="inner-header">
+                            <div class="inner-body">Stock Receive Date :</div>
+                            <div class="heading" [innerHTML]="stockReceiveDetail.Stock_Receive_Date || '-'"></div>
+                          </div>
+                          <div class="inner-header">
+                            <div class="inner-body" >Reference Number :</div>
+                            <div class="heading" [innerHTML]="stockReceiveDetail.Reference_Number || '-'"></div>
+                          </div>
+                          <div class="inner-header">
+                            <div  class="inner-body">Reference Date :</div>
+                            <div class="heading" [innerHTML]="stockReceiveDetail.Reference_Date || '-'"></div>
+                          </div>
+                        </td>
+                        <td colspan="2" style="text-align:center;vertical-align: right;">
+                           <img [src]="image" alt="" width="100%" style="width: 200px;">
+                        </td>
+                       
+                    </tr> 
+                 
+
+                </thead>
+            </table>
+        </header>
+        <div class="table-content-container">
+            <table>
+                <thead>
+                  
+                    <tr>
+                        <td colspan="8" class="no-padding">
+                            <div class="empty-header"></div>
+                        </td>
+                    </tr>
+                    <tr class="vertical-center " >
+                        <td colspan="8" style="text-align: start;vertical-align: middle ;padding: 1rem .2rem; ">
+                         
+                          <p>To:</p>
+                          <div class="header-label" [innerHTML]="stockReceiveDetail.Warehouse_Name - stockReceiveDetail.Warehouse_Code || '-' "></div>
+                          <div class="inner-body" [innerHTML]="stockReceiveDetail.Warehouse_Address || '-'">
+
+                          </div>
+                          <div class="inner-header" >
+                            <div  class="inner-body">Remarks :</div>
+                            <div class="heading" [innerHTML]="stockReceiveDetail.Remarks || '-'"></div>
+                          </div>
+                          <div class="inner-header" >
+                            <div  class="inner-body">Terms & Condition :</div>
+                            <div class="heading" [innerHTML]="stockReceiveDetail.Terms_Condition || '-'"></div>
+                          </div>
+                        </td>
+                       
+                       
+                    </tr>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Material Code</th>
+                        <th>Material Name</th>
+                        <th>Part Number</th>
+                        <th >HSN Code</th>
+                        <th class="text-end">Qty</th>
+                        <th>Tax Amount </th>
+                        <th class="text-end">Total Price</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let stock of stockReceiveDetail.Stock_Receive_Products;let i=index">
+                   <tr>
+                    <td [innerHTML]="i+1|| '0'"></td>
+                    <td [innerHTML]="stock.Material_Code|| '0'"></td> 
+                    <td [innerHTML]="stock.Material_Name|| '0'"></td>
+                    <td [innerHTML]="stock.Part_Number|| '0'"></td>
+                    <td [innerHTML]="stock.HSN_Code|| '0'" ></td>
+                    <td  [innerHTML]="stock.Quantity|| '0'"> </td>
+                    <td  [innerHTML]="stock.Total_Taxable_Amount|| '0'"></td>
+                    <td  [innerHTML]="stock.Total_Price|| '0'"> </td>
+                  
+                   </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- <footer>
+            <table>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" style="width:70%;">
+                            <div>
+
+                            </div>
+                        </td>
+                        <td style="text-align:right;">
+                            <div class="total-price-container">
+                                <div class="total-price-row">
+                                    <span>Item Value</span>
+                                    <span class="text-center" style="padding: 0 0.5rem;">=</span>
+                                    <span >098</span>
+                                </div>
+                                <div class="total-price-row">
+                                    <span>Discount</span>
+                                    <span class="text-center" style="padding: 0 0.5rem;">=</span>
+                                    <span >123</span>
+                                </div>
+                                <div class="total-price-row">
+                                    <span>Shipping Charges</span>
+                                    <span class="text-center" style="padding: 0 0.5rem;">=</span>
+                                    <span >12345</span>
+                                </div>
+                                <div class="total-price-row">
+                                    <span>Packing Charges</span>
+                                    <span class="text-center" style="padding: 0 0.5rem;">=</span>
+                                    <span >2345</span>
+                                </div>
+                                <div class="total-price-row">
+                                    <span>Other Charges</span>
+                                    <span class="text-center" style="padding: 0 0.5rem;">=</span>
+                                    <span >ewrtyu</span>
+                                </div>
+                                <div class="total-price-row">
+                                    <span>Total Tax</span>
+                                    <span class="text-center" style="padding: 0 0.5rem;">=</span>
+                                    <span >werty</span>
+                                </div>
+                                <div class="total-price-row border">
+                                    <span>Grand Total</span>
+                                    <span class="text-center" style="padding: 0 0.5rem;">=</span>
+                                    <span ></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <span style="font-size: 0.75rem;">This is Computer Generated Copy.</span>
+                           
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </footer> -->
+    </div>
+</div>

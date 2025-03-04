@@ -1,0 +1,116 @@
+<div class="breadcrumb-container">
+  <div class="breadcrumb-bar">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item active" aria-current="page">
+          <a [routerLink]="'/warehouse-master'">Warehouse</a>
+        </li>
+        <li class="breadcrumb-item" aria-current="page">Rack Master</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="aside-container">
+    <div class="assign-container">
+      <button class="all-back-button me-2" type="button" (click)="navigateBack()">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-back-up" width="24"
+            height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round"
+            strokeLinejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M9 14l-4 -4l4 -4" />
+            <path d="M5 10h11a4 4 0 1 1 0 8h-1" />
+          </svg>
+        </span>
+        <span class="hover-text">Back</span>
+      </button>
+      <div class="input-field-container position-relative">
+        <label class="floating-label">Warehouse</label>
+        <div class="all-select-comp-container">
+          <app-all-mark-select [data]="warehouseDropdown" [isClear]="false" [(allMarkModel)]="selectedWarehouse"
+            (allMarkModelChange)="onWarehouseChange($event)">
+          </app-all-mark-select>
+        </div>
+      </div>
+      <div class="ms-2">
+        <button class="all-button" (click)="onAddRackMaster()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="22"
+            height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="12" cy="12" r="9" />
+            <line x1="9" y1="12" x2="15" y2="12" />
+            <line x1="12" y1="9" x2="12" y2="15" />
+          </svg>
+          <span class="ms-2">Add Rack</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="document-main-container">
+  <div class="form-container">
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="data-table-scroll-container" [class.table-spinner]="!isTableDataRetrieved"
+          [class.hide-when-no-data]="rackList?.length == 0">
+
+          <!-- Loader -->
+          <div class="table-spinner-container">
+            <div class="spinner-border text-success" role="status">
+              <!-- <span class="sr-only">Loading...</span> -->
+            </div>
+          </div>
+
+          <!-- Table -->
+          <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr *ngFor="let pick of rackList | slice:0:1">
+                <th *ngFor="let jObject of pick | keyvalue: originalOrder; let i=index">
+                  <ng-container>{{removeUS(jObject.key)}}</ng-container>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let rack of rackList; let i=index" (click)="onTableRowClick(rack)">
+                <td *ngFor="let jObject of rack | keyvalue: originalOrder;let i=index">
+                  <ng-container>{{jObject.value}}</ng-container>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div *ngIf="rackList?.length == 0 && isTableDataRetrieved" class="no-record-found-container">
+          <div class="no-record-found-img-div">
+            <img src="../../../assets/images/no-data-found.png" alt="No data found" title="No data found">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ------------------------------ -->
+<!--        Rack Master  Modal      -->
+<!-- ------------------------------ -->
+
+<!-- Modal -->
+<div class="modal fade" id="rack-master-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <app-rack-master-detail [logData]="rackModalObject"
+      (toggleEvent)="closeRackMasterModal($event)"></app-rack-master-detail>
+  </div>
+</div>
+
+<button id="rack-master-modal-open" class="d-none all-button" data-bs-toggle="modal"
+  data-bs-target="#rack-master-modal"></button>
+<button id="rack-master-modal-close" class="d-none all-button" data-bs-dismiss="modal"
+  data-bs-target="#rack-master-modal" aria-label="Close"></button>

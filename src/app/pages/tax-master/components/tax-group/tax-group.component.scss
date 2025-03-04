@@ -1,0 +1,32 @@
+.search-icon{
+    top: 10px;
+    right: 10px;
+}
+
+.btn-alt{
+    border: 1px solid #3D3D3D;
+    border-radius: 5px;
+}
+
+.modal{
+    .modal-header{
+        color:#001C8E ;
+        border-bottom: none;
+    }
+    .modal-content{
+        border-radius: 15px;
+    }
+    label,h5{
+        color: #001C8E;
+    }
+   
+}
+
+
+@media only screen and (max-width: 768px){
+    .btn-alt{
+        margin-top: 5px;
+    }
+}
+
+

@@ -1,0 +1,21 @@
+export interface IMaterial {
+    Material_Code:string,
+    Material_Name:string,
+    Material_Group_Master_Id:string,
+    Material_Brand_Master_Id:string,
+    Material_Type_Master_Id:string,
+    Part_Number:string,
+    Barcode:string,
+    HSN_Code:string,
+    Material_Model_Master_Id:string,
+    Material_UOM_Master_Id:string,
+    Gross_Weight:string,
+    Volume:string,
+    Size_Dimensions:string,
+    Reorder_Quantity:string,
+    MSL_Quantity:string,
+    Notes:string,
+    Material_Image:string,
+    Is_Active:string,
+
+}

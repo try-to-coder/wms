@@ -1,0 +1,195 @@
+<div class="breadcrumb-container">
+  <div class="breadcrumb-bar">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item active" aria-current="page">
+          <a [routerLink]="'/inventory/stock-adjustment'">Inventory</a>
+        </li>
+        <li class="breadcrumb-item" aria-current="page">Stock Adjustment Reason</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="d-flex align-items-center gap-2">
+    <div class="aside-container">
+      <button class="all-back-button" type="button" (click)="navigateBack()">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-back-up" width="24"
+            height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round"
+            strokeLinejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M9 14l-4 -4l4 -4" />
+            <path d="M5 10h11a4 4 0 1 1 0 8h-1" />
+          </svg>
+        </span>
+        <span class="hover-text">Back</span>
+      </button>
+    </div>
+    <div class="aside-container">
+      <button class="all-button" (click)="openModal()">
+        <span [innerHtml]="addProduct || 'Add'"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="document-main-container">
+  <div class="form-container">
+    <div class="row">
+
+
+      <div class="col-md-12 mt-3">
+
+        <div class="data-table-scroll-container" [class.table-spinner]="!isTableDataRetrieved"
+          [class.hide-when-no-data]="tableList?.length == 0">
+
+          <!-- Loader -->
+          <div class="table-spinner-container">
+            <div class="spinner-border text-success" role="status">
+              <!-- <span class="sr-only">Loading...</span> -->
+            </div>
+          </div>
+
+          <!-- Table -->
+          <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr *ngFor="let table of tableList | slice:0:1">
+                <th *ngFor="let jObject of table | keyvalue: originalOrder; let i=index">
+                  <ng-container>{{removeUS(jObject.key)}}</ng-container>
+                </th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let table of tableList; let i=index">
+                <td *ngFor="let jObject of table | keyvalue: originalOrder;let i=index;">
+                  <ng-container>{{jObject.value}}</ng-container>
+                </td>
+                <td>
+                  <a class="action-icon-button edit-icon" (click)="onEdit(table)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="20"
+                      height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+                    </svg>
+                  </a>
+                  <a class="action-icon-button delete-icon" (click)="onDelete(table)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="20"
+                      height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <line x1="4" y1="7" x2="20" y2="7" />
+                      <line x1="10" y1="11" x2="10" y2="17" />
+                      <line x1="14" y1="11" x2="14" y2="17" />
+                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                    </svg>
+                  </a>
+                  <!-- <button class="btn btn-alt " (click)="onEdit(table)"><img
+                      src="../../../../../../../assets/icons/edit-option.svg" alt="">Edit</button>
+                  <button class="btn btn-alt ms-2 " (click)="onDelete(table)"><img
+                      src="../../../../../../../assets/icons/delete-option.svg" alt="">Delete</button> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <!-- No data found -->
+        <div *ngIf="tableList?.length == 0 && isTableDataRetrieved" class="no-record-found-container">
+          <div class="no-record-found-img-div">
+            <img src="../../../assets/images/no-data-found.png" alt="No data found" title="No data found">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <section class="p-3">
+  <div>
+    <table datatable class="" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+      <thead>
+        <tr *ngFor="let table of tableList | slice:0:1">
+          <th *ngFor="let jObject of table| keyvalue: originalOrder; let i=index">
+            <ng-container>{{removeUS(jObject.key)}}</ng-container>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let table of tableList; let i=index">
+          <td *ngFor="let jObject of table | keyvalue: originalOrder;let i=index">
+            <ng-container>{{jObject.value}}</ng-container>
+          </td>
+          <td>
+            <button class="btn btn-alt " (click)="onEdit(table)"><img
+                src="../../../../../../../assets/icons/edit-option.svg" alt="">Edit</button>
+            <button class="btn btn-alt ms-2 " (click)="onDelete(table)"><img
+                src="../../../../../../../assets/icons/delete-option.svg" alt="">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section> -->
+
+
+
+
+
+
+
+
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="stockAdjustmentReason" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Stock Adjustment Reason</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="stock-adjustment-reason-name">Stock Adjustment Reason</label>
+          <input type="text" class="form-control" name="stock-adjustment-reason-name"
+            [(ngModel)]="stockAdjustmentReasonMaster.Stock_Adjustment_Reason">
+        </div>
+        <div class="form-check form-switch">
+          <!-- <input class="form-check-input" type="checkbox" role="switch"   id="stock-adjustment-reason-switch"  [checked]="isActive"  (change)="isActive = !isActive" > -->
+          <input class="form-check-input" type="checkbox" role="switch" id="stock-adjustment-reason-switch"
+            [(ngModel)]="isActive">
+
+          <label class="form-check-label" for="stock-adjustment-reason-switch">Active</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="all-close-button" type="button" data-bs-dismiss="modal" aria-label="Close">Close</button>
+        <button type="button" class="all-save-button" data-bs-dismiss="modal" (click)="saveStockAdjustmentReason()"
+          *ngIf="!stockAdjustmentReasonMaster.Stock_Adjustment_Reason_Master_Id">Save</button>
+        <button type="button" class="all-update-button" data-bs-dismiss="modal" (click)="updateStockAdjustmentReason()"
+          *ngIf="stockAdjustmentReasonMaster.Stock_Adjustment_Reason_Master_Id">Update</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<div class="d-none">
+  <button id="stock-adjustment-reason-open-modal" data-bs-toggle="modal"
+    data-bs-target="#stockAdjustmentReason"></button>
+  <button id="stock-adjustment-reason-master-close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>

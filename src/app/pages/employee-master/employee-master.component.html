@@ -1,0 +1,153 @@
+<div class="breadcrumb-container">
+  <div class="breadcrumb-bar">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+      <ol class="breadcrumb mb-0">
+        <!-- <li class="breadcrumb-item active" aria-current="page">
+                  <a [routerLink]="'/employee'">Employee</a>
+              </li> -->
+        <li class="breadcrumb-item" aria-current="page">Employee</li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="d-flex align-items-center gap-2">
+    <div class="aside-container">
+      <button class="all-back-button" type="button" (click)="navigateBack()">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-back-up" width="24"
+            height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round"
+            strokeLinejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M9 14l-4 -4l4 -4" />
+            <path d="M5 10h11a4 4 0 1 1 0 8h-1" />
+          </svg>
+        </span>
+        <span class="hover-text">Back</span>
+      </button>
+    </div>
+    <div class="aside-container">
+      <div class="d-flex">
+        <!-- <button class="all-button outline me-3" (click)="onAddEmployee()">
+          <span class="ms-2">Software Rights</span>
+        </button> -->
+        <button class="all-button" (click)="onAddEmployee()">
+          <span>Add Employee</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="document-main-container">
+  <div class="form-container">
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="data-table-scroll-container" [class.table-spinner]="!isTableDataRetrieved"
+          [class.hide-when-no-data]="employeeList?.length == 0">
+
+          <!-- Loader -->
+          <div class="table-spinner-container">
+            <div class="spinner-border text-success" role="status">
+              <!-- <span class="sr-only">Loading...</span> -->
+            </div>
+          </div>
+
+          <!-- Table -->
+          <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr *ngFor="let grn of employeeList | slice:0:1">
+                <th *ngFor="let jObject of grn | keyvalue: originalOrder; let i=index">
+                  <ng-container>{{removeUS(jObject.key)}}</ng-container>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let employee of employeeList; let i=index" (click)="onEditEmployee(employee)">
+                <td *ngFor="let jObject of employee | keyvalue: originalOrder;let i=index;">
+                  <ng-container>{{jObject.value}}</ng-container>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <!-- No data found -->
+        <div *ngIf="employeeList?.length == 0 && isTableDataRetrieved" class="no-record-found-container">
+          <div class="no-record-found-img-div">
+            <img src="../../../assets/images/no-data-found.png" alt="No data found" title="No data found">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- <section class="p-3">
+  <div class="row g-3">
+    <div class="col-md-3">
+      <div class="position-relative">
+        <input type="text" class="form-control" placeholder="Search Employee List here">
+        <img src="../../../../../assets/icons/search (2).svg" class="position-absolute search-icon" alt="">
+      </div>
+    </div>
+    <div class="col-md-9 d-md-flex justify-content-end align-items-center">
+      <button class="btn btn-warning" (click)="onAddEmployee()"> <img src="../../../assets/icons/add-products.svg"
+          alt="">Add Employee</button>
+    </div>
+  </div>
+</section> -->
+
+<!-- <div class="row">
+  <div class="col-md-12">
+    <div class="data-table-scroll-container">
+      <div class="table-with-button-container">
+        <button class="btn btn-warning" (click)="onAddEmployee()">
+          <img src="../../../assets/icons/add-products.svg" alt="" />
+          <span class="ms-2">Add Employee</span>
+        </button>
+      </div>
+      <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+        <thead>
+          <tr *ngFor="let employee of employeeList | slice:0:1">
+            <th *ngFor="let jObject of employee | keyvalue: originalOrder; let i=index">
+              <ng-container>{{removeUS(jObject.key)}}</ng-container>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employeeList; let i=index">
+            <td *ngFor="let jObject of employee | keyvalue: originalOrder;let i=index"
+              (click)="onEditEmployee(employee)">
+              <ng-container>{{jObject.value}}</ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- Button trigger modal Employee Master modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="employee-detail-model" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <app-employee-detail [employeeID]="selectedEmployeeId" (toggleEvent)="closeEmployeeModal($event)">
+    </app-employee-detail>
+  </div>
+</div>
+
+<div class="d-none">
+  <button id="employee-detail-open-modal" data-bs-toggle="modal" data-bs-target="#employee-detail-model"></button>
+  <button id="employee-detail-close-modal" data-bs-dismiss="modal" data-bs-target="#employee-detail-model"
+    aria-label="Close"></button>
+</div>

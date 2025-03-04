@@ -1,0 +1,146 @@
+<div class="breadcrumb-container">
+  <div class="breadcrumb-bar">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item active" aria-current="page">GRN</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="aside-container">
+    <div class="d-flex">
+      <div class="aside-container me-2">
+        <button class="all-back-button" type="button" (click)="navigateBack()">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-back-up" width="24"
+              height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round"
+              strokeLinejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 14l-4 -4l4 -4" />
+              <path d="M5 10h11a4 4 0 1 1 0 8h-1" />
+            </svg>
+          </span>
+          <span class="hover-text">Back</span>
+        </button>
+      </div>
+      <button class="all-button outline me-2" routerLink="/grn/add-grn">Add GRN</button>
+      <button class="all-button" (click)="onGRNImport()">
+        <span>Import GRN</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="col-md-12 d-flex justify-content-end">
+    <button class="btn btn-warning" routerLink="/grn/import">import</button>
+  </div>
+</div> -->
+
+<div class="document-main-container">
+  <div class="form-container">
+    <!-- add -->
+    <!-- <div class="table-with-button-container">
+      <button class="btn btn-warning" (click)="onGRNImport()">
+        <span class="ms-2">Import GRN</span>
+      </button>
+    </div> -->
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="tab-list-container">
+          <ul class="tab-ul">
+            <li class="tab-li">
+              <a class="tab-item" (click)="onTabChange()" [class.active]="isGRNTabActive">GRN</a>
+            </li>
+            <li class="tab-li">
+              <a class="tab-item" (click)="onTabChange(true)" [class.active]="!isGRNTabActive">Received List</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="table-filter-container">
+
+          <div class="table-filter-content-container">
+            <div class="input-field-container">
+              <label class="floating-label">Warehouse</label>
+              <div class="all-select-comp-container">
+                <app-all-mark-select [data]="warehouseDropdown" [isClear]="false" [(allMarkModel)]="filterWareHouseCode"
+                  [disabled]="!isAccessWarehouseDropdown">
+                </app-all-mark-select>
+              </div>
+            </div>
+            <div class="input-field-container input-date-container">
+              <app-date-filter-field label="Date" floatingLabel="true" [isClear]="false" [(dateModel)]="filterDate">
+              </app-date-filter-field>
+            </div>
+          </div>
+
+          <div class="table-filter-button-container">
+            <div class="input-field-container filter-button-container">
+              <button class="all-filter-icon-button" [class.button-loader]="!isTableDataRetrieved"
+                (click)="onFilterClick()">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-filter" width="24"
+                    height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M5.5 5h13a1 1 0 0 1 .5 1.5l-5 5.5l0 7l-4 -3l0 -4l-5 -5.5a1 1 0 0 1 .5 -1.5" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="data-table-scroll-container" [class.table-spinner]="!isTableDataRetrieved"
+          [class.hide-when-no-data]="tableList?.length == 0">
+
+          <!-- Loader -->
+          <div class="table-spinner-container">
+            <div class="spinner-border text-success" role="status">
+              <!-- <span class="sr-only">Loading...</span> -->
+            </div>
+          </div>
+
+          <!-- Table -->
+          <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <ng-container>
+              <thead>
+                <tr *ngFor="let grn of tableList | slice:0:1">
+                  <th *ngFor="let jObject of grn | keyvalue: originalOrder; let i=index">
+                    <ng-container>{{removeUS(jObject.key)}}</ng-container>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let grn of tableList; let i=index;" (click)="onTableRowClick(grn)">
+                  <td *ngFor="let jObject of grn | keyvalue: originalOrder;">
+                    <ng-container>{{jObject.value}}</ng-container>
+                  </td>
+                </tr>
+              </tbody>
+            </ng-container>
+          </table>
+
+        </div>
+
+        <!-- No data found -->
+        <div *ngIf="tableList?.length == 0 && isTableDataRetrieved" class="no-record-found-container">
+          <div class="no-record-found-img-div">
+            <img src="../../../assets/images/no-data-found.png" alt="No data found" title="No data found">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

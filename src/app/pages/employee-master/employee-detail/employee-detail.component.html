@@ -1,0 +1,377 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="d-flex align-items-center justify-content-between w-100">
+      <h5 class="modal-title" id="staticBackdropLabel">
+        <span [innerHtml]="employeeID ? 'Update Employee' : 'Add Employee'"></span>
+      </h5>
+
+      <div class="d-flex align-items-center gap-2">
+        <button type="button" class="all-close-button" aria-label="Close" (click)="close()">Close</button>
+        <button class="btn btn-warning" type="button" (click)="saveOrUpdateEmployee()">
+          <span [innerHtml]="employeeID ? 'Update' : 'Save'"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6 col-lg-4 col-xl-4 profile-section">
+        <!-- <div class="col-md-12 form-group form-field-group image-upload">
+          <label for="employee-upload">
+            <span>Upload Image</span>
+          </label>
+          <div class="form-input-field" data-validation-info="Enter the field">
+            <input type="file" class="form-control upload" id="employee-upload" name="employee-upload"
+              [(ngModel)]="employeeMaster.Employee_Image" capture="camera" accept="image/*"
+              (change)="showPreview($event)">
+          </div>
+          <img [src]="imageSrc" class="image" alt="" *ngIf="imageUpload">
+        </div> -->
+        <div class="form-group form-field-group image-choose-container">
+          <label for="warehouse-upload" class="image-container-card">
+            <div class="image-container-image-card">
+              <ng-container *ngIf="isEmpImageAvailable">
+                <img [src]="imageSrc" alt="Employee Image" />
+                <img src="
+                " alt="">
+              </ng-container>
+              <ng-container *ngIf="!isEmpImageAvailable">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cloud-upload" width="28"
+                  height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-1" />
+                  <polyline points="9 15 12 12 15 15" />
+                  <line x1="12" y1="12" x2="12" y2="21" />
+                </svg>
+                <span class="d-block w-100 text-center">Drag and drop or click to upload</span>
+              </ng-container>
+            </div>
+            <div class="form-input-field" data-validation-info="Enter the field">
+              <input type="file" accept="image/*" id="warehouse-upload" class="d-none"
+                (change)="onLogoChange($event)" />
+            </div>
+          </label>
+          <div *ngIf="isEmpImageAvailable" class="image-remove-icon">
+            <a (click)="removeEmployeeLogo()" class="d-block text-danger" style="cursor: pointer;">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="20" height="20"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <line x1="4" y1="7" x2="20" y2="7" />
+                <line x1="10" y1="11" x2="10" y2="17" />
+                <line x1="14" y1="11" x2="14" y2="17" />
+                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-12 form-group form-field-group" [class.d-none]="!employeeID">
+          <label for="employee-code">
+            <span>Employee Code</span>
+            <span class="required-field">*</span>
+          </label>
+          <div class="form-input-field" data-validation-info="Enter the field"
+            [ngClass]="{'form-invalid-input' : (validation.isInvalid && !employeeMaster.Employee_Code)}">
+            <input id="employee-code" name="employee-code" type="text" class="form-control"
+              [disabled]="employeeID ? true : false" [(ngModel)]="employeeMaster.Employee_Code" />
+          </div>
+        </div>
+        <div class="col-md-12 form-group form-field-group">
+          <label for="employee-first-name">
+            <span>First Name</span>
+            <span class="required-field">*</span>
+          </label>
+          <div class="form-input-field" data-validation-info="Enter the field"
+            [ngClass]="{'form-invalid-input' : (validation.isInvalid && !employeeMaster.First_Name)}">
+            <input id="employee-first-name" name="employee-first-name" type="text" class="form-control"
+              [(ngModel)]="employeeMaster.First_Name" />
+          </div>
+        </div>
+        <div class="col-md-12 form-group form-field-group">
+          <label for="employee-last-name">
+            <span>Last Name</span>
+            <span class="required-field">*</span>
+          </label>
+          <div class="form-input-field" data-validation-info="Enter the field"
+            [ngClass]="{'form-invalid-input' : (validation.isInvalid && !employeeMaster.Last_Name)}">
+            <input id="employee-last-name" name="employee-last-name" type="text" class="form-control"
+              [(ngModel)]="employeeMaster.Last_Name" />
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12 col-lg-6 col-xl-6 form-group form-field-group">
+              <label for="employee-gender">
+                <span>Gender</span>
+                <!-- <span class="required-field">*</span> -->
+              </label>
+              <div class="form-input-field" data-validation-info="Enter the field">
+                <input type="text" class="form-control" id="employee-gender" name="employee-gender"
+                  [(ngModel)]="employeeMaster.Gender">
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-6 col-xl-6 form-group form-field-group">
+              <label for="employee-dob">
+                <span>DOB</span>
+                <!-- <span class="required-field">*</span> -->
+              </label>
+              <div class="form-input-field" data-validation-info="Enter the field">
+                <input type="date" class="form-control" id="employee-dob" name="employee-dob"
+                  [(ngModel)]="employeeMaster.Date_Of_Birth">
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="col-md-6 col-lg-4 col-xl-4 employee-profile-section">
+        <div class="col-md-12 form-group form-field-group">
+          <label for="employee-email">
+            <span>Email ID (user name)</span>
+            <!-- <span class="required-field">*</span> -->
+          </label>
+          <div class="form-input-field" data-validation-info="Enter the field">
+            <input type="email" class="form-control" autocomplete="new-password" id="employee-email"
+              name="employee-email" [(ngModel)]="employeeMaster.Email">
+          </div>
+        </div>
+        <div class="col-md-12 form-group form-field-group">
+          <label for="employee-emergency-mail">
+            <span>Emergency Mail ID</span>
+            <!-- <span class="required-field">*</span> -->
+          </label>
+          <div class="form-input-field" data-validation-info="Enter the field">
+            <input type="text" class="form-control" id="employee-emergency-mail" name="employee-emergency-mail"
+              [(ngModel)]="employeeMaster.Emergency_Email">
+          </div>
+        </div>
+        <div class="col-md-12 form-group form-field-group">
+          <label for="employee-password">
+            <span>Password</span>
+            <!-- <span class="required-field">*</span> -->
+          </label>
+          <div class="form-input-field" data-validation-info="Enter the field">
+            <input id="employee-password" name="employee-password" autocomplete="new-password" type="password"
+              class="form-control" [(ngModel)]="employeeMaster.Password" />
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="row ">
+            <div class="col-md-6 col-lg-6 col-xl-6 form-group form-field-group">
+              <label for="employee-date-of-join">
+                <span>Date of Joining</span>
+                <!-- <span class="required-field">*</span> -->
+              </label>
+              <div class="form-input-field" data-validation-info="Enter the field">
+                <input type="date" class="form-control" id="employee-date-of-join" name="employee-date-of-join"
+                  [(ngModel)]="employeeMaster.Date_Of_Join">
+              </div>
+
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6 form-group form-field-group">
+              <label for="employee-mobile">
+                <span>Mobile</span>
+                <!-- <span class="required-field">*</span> -->
+              </label>
+              <div class="form-input-field" data-validation-info="Enter the field">
+                <input type="text" class="form-control" id="employee-mobile" name="employee-mobile"
+                  [(ngModel)]="employeeMaster.Phone" (keypress)="numberValidation($event,phone.value,10)" #phone>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6 col-lg-6 col-xl-6 form-group form-field-group">
+              <label for="employee-department">
+                <span>Department</span>
+                <!-- <span class="required-field">*</span> -->
+              </label>
+              <div class="form-input-field" data-validation-info="Enter the field">
+                <input type="text" class="form-control" id="employee-department" name="employee-department"
+                  [(ngModel)]="employeeMaster.Department">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6 form-group form-field-group">
+              <label for="employee-designation">
+                <span>Designation</span>
+                <!-- <span class="required-field">*</span> -->
+              </label>
+              <div class="form-input-field" data-validation-info="Enter the field">
+                <input type="text" class="form-control" id="employee-designation" name="employee-designation"
+                  [(ngModel)]="employeeMaster.Designation">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 form-group form-field-group">
+            <label for="employee-softwarerights">
+              <span>Software Rights Group</span>
+              <!-- <span class="required-field">*</span> -->
+            </label>
+            <div class="all-select-comp-container">
+              <app-all-mark-select [data]="rightsGroupDropdown" [isClear]="false"
+                [(allMarkModel)]="employeeMaster.Software_Rights_Group">
+              </app-all-mark-select>
+            </div>
+            <!-- <div class="form-input-field" data-validation-info="Enter the field">
+              <select class="form-select" aria-label="Default select example" name="employee-softwarerights"
+                [(ngModel)]="employeeMaster.Software_Rights_Group">
+              </select>
+            </div> -->
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="row ">
+            <div class="col-md-6 col-lg-12 col-xl-6 form-group form-field-group">
+              <label>
+                <span>Shift Starting Time</span>
+                <!-- <span class="required-field">*</span> -->
+              </label>
+              <div class="form-input-field" data-validation-info="Enter the field">
+                <input type="time" class="form-control" [(ngModel)]="employeeMaster.Shift_Start_Timing">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-12 col-xl-6 form-group form-field-group">
+              <label>
+                <span>Shift Ending Time</span>
+                <!-- <span class="required-field">*</span> -->
+              </label>
+              <div class="form-input-field" data-validation-info="Enter the field">
+                <input type="time" class="form-control" [(ngModel)]="employeeMaster.Shift_End_Timing">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-6 col-lg-4 col-xl-4 address-section">
+        <div class="col-md-12 form-group form-field-group">
+          <label for="employee-ad1">
+            <span>Address Line1</span>
+            <!-- <span class="required-field">*</span> -->
+          </label>
+          <div class="form-input-field" data-validation-info="Enter the field">
+            <input id="employee-ad1" name="employee-ad1" type="text" class="form-control"
+              [(ngModel)]="employeeMaster.Address_Line_1" />
+          </div>
+        </div>
+        <div class="col-md-12 form-group form-field-group">
+          <label for="employee-ad2">
+            <span>Address Line2</span>
+            <!-- <span class="required-field">*</span> -->
+          </label>
+          <div class="form-input-field" data-validation-info="Enter the field">
+            <input id="employee-ad2" name="employee-ad2" type="text" class="form-control"
+              [(ngModel)]="employeeMaster.Address_Line_2" />
+          </div>
+        </div>
+        <div class="col-md-12 form-group form-field-group">
+          <label for="employee-location">
+            <span>Location</span>
+            <!-- <span class="required-field">*</span> -->
+          </label>
+          <div class="form-input-field" data-validation-info="Enter the field">
+            <input id="employee-location" name="employee-location" type="text" class="form-control"
+              [(ngModel)]="employeeMaster.Location" />
+          </div>
+        </div>
+        <div class="col-md-12 form-group form-field-group">
+          <label for="employee-city">
+            <span>City/District</span>
+            <!-- <span class="required-field">*</span> -->
+          </label>
+          <div class="form-input-field" data-validation-info="Enter the field">
+            <input type="text" class="form-control" id="employee-city" name="employee-city"
+              [(ngModel)]="employeeMaster.City_District">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6 col-lg-6 col-xl-6 form-group form-field-group">
+              <label for="employee-state">
+                <span>State</span>
+                <!-- <span class="required-field">*</span> -->
+              </label>
+              <div class="form-input-field" data-validation-info="Enter the field">
+                <input type="text" class="form-control" id="employee-state" name="employee-state"
+                  [(ngModel)]="employeeMaster.State">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6 form-group form-field-group">
+              <label for="employee-country">
+                <span>Country</span>
+                <!-- <span class="required-field">*</span> -->
+              </label>
+              <div class="form-input-field" data-validation-info="Enter the field">
+                <input type="text" class="form-control" id="employee-country" name="employee-country"
+                  [(ngModel)]="employeeMaster.Country">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-lg-12 col-xl-6 form-group form-field-group">
+              <label for="pincode-code">
+                <span>Postal Code</span>
+                <!-- <span class="required-field">*</span> -->
+              </label>
+              <div class="form-input-field" data-validation-info="Enter the field">
+                <input type="text" class="form-control" id="pincode-code" name="pincode-code"
+                  [(ngModel)]="employeeMaster.Pincode" (keypress)="numberValidation($event,pincode.value,6)" #pincode>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-12 col-xl-6 form-group form-field-group">
+              <label for="employee-emergency-number">
+                <span>Emergency ph No</span>
+                <!-- <span class="required-field">*</span> -->
+              </label>
+              <div class="form-input-field" data-validation-info="Enter the field">
+                <input type="text" class="form-control" id="employee-emergency-number" name="employee-emergency-number"
+                  [(ngModel)]="employeeMaster.Emergency_Phone" (keypress)="numberValidation($event,emergency.value,10)"
+                  #emergency>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-12 form-group form-field-group">
+            <label for="employee-remarks">
+              <span>Remarks</span>
+              <!-- <span class="required-field">*</span> -->
+            </label>
+            <div class="form-input-field" data-validation-info="Enter the field">
+              <textarea name="employee-remarks" class="form-control" cols="30" rows="1"
+                [(ngModel)]="employeeMaster.Remarks">
+            </textarea>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>

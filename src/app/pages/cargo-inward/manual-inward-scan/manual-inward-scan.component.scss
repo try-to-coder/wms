@@ -1,0 +1,46 @@
+.input-field-group {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    margin: 0 2rem;
+    padding: 0 1rem;
+    -webkit-box-shadow: 0 2px 8px 0 rgb(34 41 47 / 14%);
+    box-shadow: 0 2px 8px 0 rgb(34 41 47 / 14%);
+    border-radius: 0.3rem;
+
+    &.invalid {
+        box-shadow: 0 0px 4px 0 rgba(var(--bs-danger-rgb), 0.5);
+    }
+
+    .form-control {
+        border: none;
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+}
+
+.invalid-field-container {
+    padding-top: 0.75rem;
+    text-align: center;
+}
+
+.modal-table {
+    table {
+        width: 100%;
+    }
+    .row-card {
+        box-shadow: 0 2px 8px 0 rgb(34 41 47 / 14%);
+        border-radius: 0.25rem;
+        cursor: pointer;
+        td {
+            padding: 1rem;
+        }
+    }
+    .empty-row {
+        td {
+            padding: 0.5rem;
+        }
+    }
+}

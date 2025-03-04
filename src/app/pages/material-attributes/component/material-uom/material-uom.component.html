@@ -1,0 +1,20 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div class="mb-3">
+        <label for="material-model-name"> Material UOM</label>
+          <input type="text" class="form-control" name="material-model-name" [(ngModel)]="materialUomMaster.Material_UOM">
+       </div>
+       <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch"   id="material-uom-switch" [(ngModel)]="materialUomMaster.Active_Status" >
+        <label class="form-check-label" for="material-uom-switch">Active</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="saveMaterialUom()" *ngIf="!materialUomMaster.Material_UOM_Master_Id">Save</button>
+      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateMaterialUom()" *ngIf="materialUomMaster.Material_UOM_Master_Id">Update</button>
+    </div>
+  </div>

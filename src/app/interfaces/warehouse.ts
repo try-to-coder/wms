@@ -1,0 +1,23 @@
+export interface IWarehouse {
+    Warehouse_Code:string,
+    Warehouse_Name:string,
+    Location:string,
+    Total_Capapcity:string,
+    Reserve_Capapcity:string,
+    Total_Racks:string,
+    Total_Bins:string,
+    Rack_Capacity:string,
+    Bin_Capacity:string,
+    Total_Employees:string,
+    Address_Line_1:string,
+    Address_Line_2:string,
+    Contact_Person:string,
+    Phone:string,
+    Email:string,
+    Designation:string,
+    Notes:string,
+    Warehouse_Image:string,
+    Is_Active:string,
+    Created_Date:string,
+    Modified_Date:string
+}

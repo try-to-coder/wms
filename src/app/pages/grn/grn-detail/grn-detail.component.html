@@ -1,0 +1,299 @@
+<div class="breadcrumb-container">
+    <div class="breadcrumb-bar">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item active" aria-current="page">
+                    <a [routerLink]="'/grn'">GRN</a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page">Detail</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+        <div class="aside-container">
+            <button class="all-back-button" type="button" (click)="navigateBack()">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-back-up"
+                        width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none"
+                        strokeLinecap="round" strokeLinejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M9 14l-4 -4l4 -4" />
+                        <path d="M5 10h11a4 4 0 1 1 0 8h-1" />
+                    </svg>
+                </span>
+                <span class="hover-text">Back</span>
+            </button>
+        </div>
+        <div class="aside-container">
+            <button class="all-button" (click)="saveStockReceive()">
+                <span>Receive</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="document-main-container">
+    <div class="form-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3 form-group form-field-group">
+                        <label>
+                            <span>GRN Number</span>
+                            <span class="required-field">*</span>
+                        </label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="grnDetail.GRN_Number" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group form-field-group">
+                        <label>
+                            <span>GRN Date</span>
+                            <span class="required-field">*</span>
+                        </label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="grnDetail.GRN_Date" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group form-field-group">
+                        <label><span>Purchase Order</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="grnDetail.Purchase_Order_Number" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group form-field-group">
+                        <label><span>Purchase Order Date</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="grnDetail.Purchase_Order_Date" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group form-field-group">
+                        <label><span>Supplier</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="grnDetail.Supplier_Name" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group form-field-group">
+                        <label><span>Warehouse</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="grnDetail.Warehouse_Name" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group form-field-group">
+                        <label><span>Warehouse Address</span></label>
+                        <div class="form-input-field">
+                            <input type="text" class="form-control" autocomplete="off"
+                                [(ngModel)]="grnDetail.Warehouse_Address" />
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-3 form-group form-field-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label><span>Warehouse</span></label>
+                            <div class="form-input-field">
+                                <input type="text" class="form-control" autocomplete="off"
+                                    [(ngModel)]="grnDetail.Warehouse_Name" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label><span>Warehouse Address</span></label>
+                            <div class="form-input-field">
+                                <textarea type="text" class="form-control" autocomplete="off"
+                                    [(ngModel)]="grnDetail.Warehouse_Address"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group form-field-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label><span>Supplier</span></label>
+                            <div class="form-input-field">
+                                <input type="text" class="form-control" autocomplete="off"
+                                    [(ngModel)]="grnDetail.Supplier_Name" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label><span>Supplier Address</span></label>
+                            <div class="form-input-field">
+                                <textarea type="text" class="form-control" autocomplete="off"
+                                    [(ngModel)]="grnDetail.Supplier_Address"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                    <!-- <div class="col-md-6 form-group form-field-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Terms and Condition</label>
+                            <div class="form-input-field">
+                                <textarea class="form-control" cols="30" rows="2"
+                                    [(ngModel)]="grnDetail.Terms_Condition"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label>Remarks</label>
+                            <div class="form-input-field">
+                                <textarea class="form-control" cols="30" rows="2"
+                                    [(ngModel)]="grnDetail.Remarks"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="page-sub-header">
+                    <span class="title">Products</span>
+
+                    <!-- <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="prodcut-detail-view" [(ngModel)]="isShowDetailView">
+                        <label class="form-check-label" for="prodcut-detail-view">
+                            Detail view
+                        </label>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="total-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="isAllProduct"
+                                        (ngModelChange)="isAllChange($event)" />
+                                </th>
+                                <th>S.No</th>
+                                <th>Material Code</th>
+                                <th>Material Name</th>
+                                <th>Part Number</th>
+                                <th>HSN Code</th>
+                                <th class="text-center">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of receivableProducts;let i=index;">
+                                <td>
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="product.isSelected" />
+                                </td>
+                                <td><span [innerHtml]="i+1"></span></td>
+                                <td><span [innerHtml]="product.Material_Code"></span></td>
+                                <td><span [innerHtml]="product.Material_Name"></span></td>
+                                <td><span [innerHtml]="product.Part_Number"></span></td>
+                                <td><span [innerHtml]="product.HSN_Code"></span></td>
+                                <td class="text-center"><span [innerHtml]="product.Entered_Quantity"></span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr *ngFor="let product of receivedProducts;let i=index;">
+                                <td colspan="2" class="text-center text-success"><span>Received</span></td>
+                                <!-- <td><span [innerHtml]="i+1"></span></td> -->
+                                <td><span [innerHtml]="product.Material_Code"></span></td>
+                                <td><span [innerHtml]="product.Material_Name"></span></td>
+                                <td><span [innerHtml]="product.Part_Number"></span></td>
+                                <td><span [innerHtml]="product.HSN_Code"></span></td>
+                                <td class="text-center"><span [innerHtml]="product.Received_Quantity"></span></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- <div class="total-table-container" [class.d-none]="!isShowDetailView">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="isAllProduct"
+                                        (ngModelChange)="isAllChange($event)" />
+                                </th>
+                                <th>S.No</th>
+                                <th>Material Code</th>
+                                <th>Material Name</th>
+                                <th>Part Number</th>
+                                <th>HSN Code</th>
+                                <th>Base Price</th>
+                                <th>Discount</th>
+                                <th>Unit Price</th>
+                                <th>Unit Tax</th>
+                                <th>Purchase Price</th>
+                                <th>Quantity</th>
+                                <th>SGST</th>
+                                <th>CGST</th>
+                                <th>IGST</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of receivableProducts;let i=index;">
+                                <td>
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="product.isSelected" />
+                                </td>
+                                <td><span [innerHtml]="i+1"></span></td>
+                                <td><span [innerHtml]="product.Material_Code"></span></td>
+                                <td><span [innerHtml]="product.Material_Name"></span></td>
+                                <td><span [innerHtml]="product.Part_Number"></span></td>
+                                <td><span [innerHtml]="product.HSN_Code"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Base_Price"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Discount_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Unit_Price"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Unit_Tax_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Sell_Price"></span></td>
+                                <td><span [innerHtml]="product.Quantity"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.SGST_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.CGST_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.IGST_Amount"></span></td>
+                                <td class="text-end"><span [innerHtml]="product.Total_Price"></span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="15" class="text-end">Subtotal</td>
+                                <td class="text-end"><span [innerHtml]="grnDetail.Sub_Total"></span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="15" class="text-end">Charges</td>
+                                <td class="text-end"><span [innerHtml]="grnDetail.Order_Total_Charge_With_Tax"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="15" class="text-end">Roundoff</td>
+                                <td class="text-end"><span [innerHtml]="grnDetail.Rounding_Off"></span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="15" class="text-end">Total</td>
+                                <td class="text-end"><span [innerHtml]="grnDetail.Grand_Total"></span></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div> -->
+            </div>
+
+            <div class="col-md-12">
+                <div class="row mt-4">
+                    <div class="col-md-6 form-group form-field-group">
+                        <label>Terms and Condition</label>
+                        <div class="form-input-field">
+                            <textarea class="form-control" cols="30" rows="3"
+                                [(ngModel)]="grnDetail.Terms_Condition"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group form-field-group">
+                        <label>Remarks</label>
+                        <div class="form-input-field">
+                            <textarea class="form-control" cols="30" rows="3"
+                                [(ngModel)]="grnDetail.Remarks"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

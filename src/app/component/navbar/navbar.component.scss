@@ -1,0 +1,138 @@
+// .navbar{
+//     border-bottom: 1px solid skyblue;
+// }
+// .profile{
+//     height: 40px;
+//     border-radius: 50%;
+// }
+// .home{
+//     height: 40px;
+// }
+// .title{
+//     height: 40px;
+// }
+// .title-border{
+//     border-right: 1px solid skyblue;
+// }
+// .dropdown-menu{
+//     visibility: hidden;
+// }
+
+// @media only screen and (max-width: 768px){
+//     .navbar-nav{
+//         position: relative;
+//         width: auto;
+
+//     }
+//     .nav-item{
+//         .home{
+//         position: absolute;
+//         top: 0;
+//         left: 10px;
+//         }
+
+//         .title{
+//             position: absolute;
+//             top: 0;
+//             left: 150px;
+
+//         }
+
+//     }
+
+//     .name-content{
+//         display: none;
+//     }
+//         .profile-content{
+//             position: absolute;
+//             right: 10px;
+//             top: 10px;
+//             }
+
+//          .small-title{
+//                 position: absolute;
+//                 left: 50px;
+//                 top: 35px ;
+//             }
+//      .dropdown-menu{
+//         visibility: visible;
+//         position: absolute;
+//         left: -130px;
+
+//      }
+
+//      .title-border{
+//         border: none;
+//      }
+
+// }
+
+.app-toolbar-container {
+    padding: 0.25rem 0;
+    border-bottom: 1px solid var(--app-primary-color);
+    background-color: #fff;
+    .app-toolbar-content-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .left-container {
+            display: flex;
+            align-items: center;
+            padding: 0 0.5rem;
+            .home-icon {
+                img {
+                    max-height: 36px;
+                }
+            }
+            .company-logo {
+                padding: 0 1rem;
+                img {
+                    max-height: 48px;
+                }
+            }
+            .title {
+                font-weight: 500;
+                color: var(--app-primary-color);
+            }
+        }
+        .aside-container {
+            position: relative;
+            // padding-right: 1rem;
+            .profile-container {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                color: var(--app-primary-color);
+                padding: 0.75rem;
+            }
+            .image-container {
+                width: 32px;
+                display: block;
+                // background: #fff;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 16px;
+                img {
+                    height: 32px;
+                    max-width: 100%;
+                    margin: 0;
+                }
+            }
+            .name-container {
+                text-align: center;
+                span {
+                    display: block;
+                    &.role {
+                        font-size: 0.8rem;
+                        /* font-weight: 600; */
+                        margin-top: 4px;
+                        color: initial;
+                    }
+                }
+            }
+            .dropdown-item {
+                cursor: pointer;
+            }
+        }
+    }
+}

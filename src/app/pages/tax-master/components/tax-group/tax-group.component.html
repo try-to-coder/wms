@@ -1,0 +1,75 @@
+<nav  style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb ">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active p-2 " aria-current="page" routerLink="/tax-master">Tax Master</li>
+      <li class="breadcrumb-item active p-2 " aria-current="page" >Tax Group</li>
+     
+    </ol>
+  </nav>
+
+  <section class="p-3">
+    <div class="row g-3">
+        <div class="col-md-3">
+            <div class="position-relative">
+                <input type="text" class="form-control" placeholder="Search PO here...">
+                <img src="../../../../../assets/icons/search (2).svg" class="position-absolute search-icon"  alt="">
+            </div>
+        </div>
+        <div class="col-md-9 d-md-flex justify-content-end align-items-center">
+          <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Add</button>
+        </div>
+    </div>
+     <div class="table-overflow">
+    <table class=" table table-striped default-table text-center mt-3">
+        <thead>
+          <tr *ngFor="let taxgroup of taxGroupList | slice:0:1">
+            <th *ngFor="let jObject of  taxGroupList[1]  | keyvalue: originalOrder; let i=index">
+                <ng-container>{{removeUS(jObject.key)}} </ng-container>
+            </th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let taxgroup of taxGroupList; let i=index">
+            <td *ngFor="let jObject of  taxgroup | keyvalue: originalOrder;let i=index" >
+              <ng-container>{{jObject.value}}</ng-container>
+          </td>
+          <td> <button class="btn btn-alt " (click)="onEditTax(taxgroup)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img src="../../../../../../../assets/icons/edit-option.svg" alt="">Edit</button>
+            <button class="btn btn-alt ms-2 " (click)="deleteTaxGroup(taxgroup)"><img src="../../../../../../../assets/icons/delete-option.svg" alt="">Delete</button></td>
+          </tr>
+        </tbody>
+    </table>
+     </div>
+
+
+  </section>
+
+
+
+  
+  <!--                   ADD Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Tax Group</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-5">
+            <div>
+            <label for="tax-group-name">Tax Group</label>
+            <input type="text" class="form-control"  name="tax-group-name" [(ngModel)]="taxGroupmaster.Tax_Group">
+            </div>
+            <div class="form-check form-switch mt-3">
+              <input class="form-check-input" type="checkbox" role="switch"  value="active"  id="flexSwitchCheckDefault"  [(ngModel)]="taxGroupmaster.Active_Status" [checked]="true">
+              <label class="form-check-label" for="flexSwitchCheckDefault"  >Active</label>
+            </div>
+            <div class="p-3 text-center">
+                <button class="btn btn-warning me-3"  data-bs-dismiss="modal" (click)="onAddTaxGroup()">Add</button>
+                <button class="btn btn-warning" (click)="UpdateTaxGroup()">Update</button>
+
+            </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>

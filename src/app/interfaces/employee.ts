@@ -1,0 +1,31 @@
+export interface IEmployee {
+    Employee_Code:string
+    First_Name: string,
+    Last_Name: string,
+    Gender:string,
+    Date_Of_Birth:String,
+    Date_Of_Join:string,
+    Phone:string,
+    Email:string,
+    Password:string,
+    Department:string,
+    Designation:string,
+    Address_Line_1:string,
+    Address_Line_2:string,
+    Location:string,
+    City_District:string,
+    State:string,
+    Country:string,
+    Pincode:string,
+    Emergency_Phone:string,
+    Emergency_Email:string,
+    Main_Store:string,
+    Sub_Store:string,
+    Software_Rights_Group:string,
+    Shift_Start_Timing:string,
+    Shift_End_Timing:string,
+    Remarks:string,
+    Employee_Image:string,
+    Is_Active:string
+
+}

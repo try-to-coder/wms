@@ -1,0 +1,58 @@
+<div class="filter-date-field-container" [class.minimized-width]="floatingLabel">
+    <label *ngIf="!hideLabel" class="mr-auto flex-wrap" [class.floating-label]="floatingLabel">
+        <span *ngIf="!selectedLabel" [innerHtml]="label"></span>
+        <span *ngIf="selectedLabel" [innerHtml]="selectedLabel"></span>
+    </label>
+    <div class="option-main-container">
+        <div class="select-input-container">
+            <span class="mr-auto form-control" (click)="openOptionsList()">
+                {{selectedFromText}}
+                <span *ngIf="selectedToText" class="font-bold padding-x">to</span>
+                {{selectedToText}}
+            </span>
+            <span *ngIf="selectedText && isClear" class="clear-icon">
+                <a (click)="clearDateField()">
+                    <i class="fas fa-times-circle"></i>
+                </a>
+            </span>
+        </div>
+        <div *ngIf="isOptionOpened" class="select-option-container">
+            <div class="select-search-container">
+                <ul id="filter-date-ul-container" *ngIf="dateFilterList.length" class="select-list" role="list">
+                    <ng-container *ngFor="let data of dateFilterList;let i=index;">
+                        <!-- Normal Options container -->
+                        <ng-container *ngIf="data.id != dateRangeID">
+                            <li class="date-field-option-list" role="listitem">
+                                <a [class.selected-item]="data.isSelected" (click)="optionSelected(data)"
+                                    [innerHtml]="data.displayText"></a>
+                            </li>
+                        </ng-container>
+                        <!-- Custom Range container -->
+                        <ng-container *ngIf="data.id === dateRangeID">
+                            <li>
+                                <a class="d-flex" [class.selected-item]="data.isSelected"
+                                    (click)="customRangeClick($event)">
+                                    <span [innerHtml]="data.displayText"></span>
+                                </a>
+                                <div class="custom-date-container" [class.default-visible]="data.isSelected">
+                                    <span class="custom-date-box">
+                                        <input type="date" class="form-control" [(ngModel)]="customDateObject.fromDate"
+                                            [class.invalid-field]="customDateValidate && !customDateObject.fromDate" />
+                                        <span>to</span>
+                                        <input type="date" class="form-control" [(ngModel)]="customDateObject.toDate"
+                                            [class.invalid-field]="customDateInValid || (customDateValidate && !customDateObject.toDate)" />
+                                    </span>
+                                    <span class="custom-button-box">
+                                        <button class="all-cancel-outline-button mt-2" (click)="customDateCancel($event)">Cancel</button>
+                                        <button class="all-add-button ms-2 mt-2" (click)="customDateCompleted($event)">Apply</button>
+                                    </span>
+                                </div>
+                            </li>
+                        </ng-container>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

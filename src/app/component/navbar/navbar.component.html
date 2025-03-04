@@ -1,0 +1,98 @@
+<div class="app-toolbar-container">
+  <div class="app-toolbar-content-container">
+    <!-- left side container -->
+    <div class="left-container">
+      <div class="home-icon">
+        <a class="nav-link active" aria-current="page" routerLink="/home">
+          <img src="../../../assets/icons/home.svg" class="home" alt="home-icon">
+        </a>
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <polyline points="5 12 3 12 12 3 21 12 19 12" />
+          <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+          <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+        </svg> -->
+      </div>
+      <div class="company-logo">
+        <a class="nav-link " href="#"><img src="../../../assets/images/warehouse_logo.png" class="title" alt=""></a>
+      </div>
+      <div class="title">
+        <span>Warehouse Management Software</span>
+      </div>
+    </div>
+
+    <!-- right side container -->
+    <div class="aside-container">
+      <a class="profile-container" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="image-container">
+          <img [src]="userImage" />
+        </span>
+        <span class="name-container">
+          <span [innerHtml]="userName || 'User'"></span>
+          <span class="role" [innerHtml]="userRole || ''"></span>
+        </span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item">Profile</a></li>
+        <li><a class="dropdown-item" (click)="logOut()">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container-fluid">
+
+
+    <ul class="navbar-nav ">
+      <li class="nav-item home">
+        <a class="nav-link active" aria-current="page" routerLink="/home"><img src="../../../assets/icons/home.svg"
+            class="home" alt=""></a>
+      </li>
+      <li class="nav-item  title-border ">
+        <a class="nav-link " href="#"><img src="../../../assets/images/smalltittle.png" class="title" alt=""></a>
+
+
+      </li>
+      <li class="nav-item  d-flex justify-content-center align-items-center ms-3 small-title ">
+        <small class="fw-bold text-nowrap">Warehouse Management Software</small>
+      </li>
+    </ul>
+    <div class=" d-flex justify-content-around align-items-center ms-auto  profile-content ">
+
+      <a href="#" class="dropdown ms-auto" data-bs-toggle="dropdown">
+        <img
+          src="data:image/png;base64,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"
+          class="profile" alt=""></a>
+
+      <div class="dropdown-menu p-2">
+        <p>Kavitalini Kumaran</p>
+        <small>Admin</small>
+      </div>
+      <div class="name-content">
+        <p class="mb-0">kavithalini kumaran</p>
+        <small>Admin </small>
+      </div>
+
+
+
+    </div>
+  </div>
+
+</nav> -->
+
+
+<!-- <div class="dropdown">
+    <a class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <p class="mb-0">kavithalini kumaran</p>
+      <small>Admin </small>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+  </div> -->

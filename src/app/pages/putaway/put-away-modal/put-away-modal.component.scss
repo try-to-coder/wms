@@ -1,0 +1,23 @@
+.scan-field-container {
+    position: relative;
+    .clear-icon {
+        color: var(--bs-danger);
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+}
+
+.put-away-table {
+    margin-top: 2rem;
+    th {
+        background-color: rgba(var(--app-primary-rgb), 75%);
+        color: #fff;
+    }
+    td{
+        vertical-align: middle;
+    }
+    .action-icon-button{
+        padding: 0.25rem 0.5rem;
+    }
+}

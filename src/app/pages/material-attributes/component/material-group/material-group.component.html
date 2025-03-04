@@ -1,0 +1,20 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="staticBackdropLabel">Material Group</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="material-group-name"> Material Group</label>
+        <input type="text" class="form-control" name="material-group-name" [(ngModel)]="materialGroupMaster.Material_Group">
+     </div>
+     <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch"   id="material-group-switch" [(ngModel)]="materialGroupMaster.Active_Status">
+      <label class="form-check-label" for="material-group-switch">Active</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="SaveMaterialGroup()" *ngIf="!materialGroupMaster.Material_Group_Master_Id" >Save</button>
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateMaterialGroup()" *ngIf="materialGroupMaster.Material_Group_Master_Id" >Update</button>
+  </div>
+</div>

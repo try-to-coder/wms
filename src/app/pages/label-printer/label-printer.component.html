@@ -1,0 +1,284 @@
+<nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb ">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active p-2 " aria-current="page" routerLink="/setting">Settings</li>
+        <li class="breadcrumb-item active p-2 " aria-current="page">Label-printer</li>
+
+    </ol>
+</nav>
+
+<section class="p-3">
+
+    <div class="tab-menu-container">
+        <div class="tab-list-container">
+            <ul class="tab-ul">
+                <li class="tab-li">
+                    <a class="tab-item" (click)="getSelectTabData('Template')"
+                        [class.active]="LabelColName == 'Template'">Template
+                        </a>
+                </li>
+                <li class="tab-li">
+                    <a class="tab-item" (click)="getSelectTabData('Label')"
+                        [class.active]="LabelColName == 'Label'">Label Size
+                        </a>
+                </li>
+                
+                <li class="tab-li">
+                    <a class="tab-item" (click)="getSelectTabData('Connection')"
+                        [class.active]="LabelColName == 'Connection'">Connection
+                        </a>
+                </li>
+
+            </ul>
+        </div>
+        <div>
+            <!-- <button class="btn btn-outline-warning" data-bs-toggle="modal" (click)="openModal()">{{addProduct}}</button> -->
+            <button *ngIf="LabelColName == 'Template'" class="btn btn-outline-warning"  data-bs-toggle="modal" data-bs-target="#addprinter" >{{LabelColName}}</button>
+            <button *ngIf="LabelColName == 'Label'" class="btn btn-outline-warning"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" >{{LabelColName}}</button>
+            <button *ngIf="LabelColName == 'Connection'" class="btn btn-outline-warning"  data-bs-toggle="modal" data-bs-target="#addprinter" >{{LabelColName}}</button>
+        </div>
+    </div>
+
+
+    <div>
+        <br>
+
+        <table datatable class="" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+                <tr *ngFor="let table of tablelist | slice:0:1">
+                    <th *ngFor="let jObject of table| keyvalue: originalOrder; let i=index">
+                        <ng-container>{{removeUS(jObject.key)}}</ng-container>
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let table of tablelist; let i=index">
+                    <td *ngFor="let jObject of table | keyvalue: originalOrder;let i=index">
+                        <ng-container>{{jObject.value}}</ng-container>
+                    </td>
+                    <td>
+                        <button *ngIf="LabelColName == 'Template'"  class="btn btn-alt " (click)="onEdit(table)" data-bs-toggle="modal" data-bs-target="#addprinter" (click)=" onEditTemplate(table)"><img
+                                src="../../../../../../../assets/icons/edit-option.svg" alt="">
+                                Edit
+                        </button>
+                        <button *ngIf="LabelColName == 'Label'" class="btn btn-alt " (click)="onEdit(table)" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)=" onEditLabelSize(table)"><img
+                                src="../../../../../../../assets/icons/edit-option.svg" alt="">
+                                Edit
+                        </button>
+                        <button *ngIf="LabelColName == 'Template'" class="btn btn-alt ms-2 " (click)="deleteTemplate(table)"><img
+                                src="../../../../../../../assets/icons/delete-option.svg" alt="">Delete</button>
+                        <button *ngIf="LabelColName == 'Label'" class="btn btn-alt ms-2 " (click)="deleteLabel(table)"><img
+                                src="../../../../../../../assets/icons/delete-option.svg" alt="">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+        <!-- <table class="table table-striped default-table mt-3">
+        <thead>
+          <tr *ngFor="let table of tablelist | slice:0:1">
+            <th *ngFor="let jObject of table| keyvalue: originalOrder; let i=index">
+              <ng-container>{{removeUS(jObject.key)}}</ng-container>
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let table of tablelist; let i=index">
+            <td *ngFor="let jObject of table | keyvalue: originalOrder;let i=index">
+              <ng-container>{{jObject.value}}</ng-container>
+            </td>
+            <td>
+              <button class="btn btn-alt " (click)="onEdit(table)"><img
+                  src="../../../../../../../assets/icons/edit-option.svg" alt="">Edit</button>
+              <button class="btn btn-alt ms-2 " (click)="ondelete(table)"><img
+                  src="../../../../../../../assets/icons/delete-option.svg" alt="">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table> -->
+
+
+    </div>
+</section>
+
+<!-- <section class="p-3">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="d-flex justify-content-end align-items-center">
+                <button class="btn btn-outline-warning">Add Connection</button>
+            </div>
+            <div>
+                <table class="table table-striped default-table mt-3 ">
+                    <thead class="text-center">
+                        <tr *ngFor="let connection of tablelist | slice:0:1">
+                            <th *ngFor="let jObject of connection | keyvalue: originalOrder; let i=index">
+                                <ng-container>{{removeUS(jObject.key)}} </ng-container>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let connection of tablelist; let i=index">
+                            <td *ngFor="let jObject of  connection | keyvalue: originalOrder;let i=index">
+                                <ng-container>{{jObject.value}}</ng-container>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="d-flex justify-content-end align-items-center">
+                <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add
+                    Label Size</button>
+            </div>
+            <div class="table-overflow1 table-overflow">
+                <table class="table table-striped default-table mt-3 ">
+                    <thead class="text-center">
+                        <tr *ngFor="let labelSize of tablelist | slice:0:1 ">
+                            <th *ngFor="let jObject of labelSize | keyvalue: originalOrder; let i=index">
+                                <ng-container>{{removeUS(jObject.key)}} </ng-container>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let labelSize of tablelist; let i=index">
+                            <td *ngFor="let jObject of  labelSize | keyvalue: originalOrder;let i=index"
+                                data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                (click)="onEditLabelSize(labelSize)">
+                                <ng-container>{{jObject.value}}</ng-container>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="d-flex justify-content-end align-items-center">
+                <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#addprinter">Add
+                    Template</button>
+            </div>
+            <div class="table-overflow1 table-overflow">
+                <table class="table table-striped default-table mt-3 ">
+                    <thead class="text-center">
+                        <tr *ngFor="let template of tablelist | slice:0:1">
+                            <th *ngFor="let jObject of template | keyvalue: originalOrder; let i=index">
+                                <ng-container>{{removeUS(jObject.key)}} </ng-container>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let template of tablelist; let i=index">
+                            <td *ngFor="let jObject of  template | keyvalue: originalOrder;let i=index"
+                                data-bs-toggle="modal" data-bs-target="#addprinter" (click)=" onEditTemplate(template)">
+                                <ng-container>{{jObject.value}}</ng-container>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</section> -->
+
+
+<!-- Button trigger modal -->
+
+
+<!--    add Label Size Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add Label Size</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="mb-3">
+                    <label for="labelSize-name">Name</label>
+                    <input type="text" class="form-control" name="labelSize-name"
+                        [(ngModel)]="labelSizeMaster.Label_Size_Name">
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="labelSize-weight">Weight</label>
+                            <input type="number" class="form-control" name="labelSize-weight"
+                                [(ngModel)]="labelSizeMaster.Label_Weight">
+
+                        </div>
+                        <div class="col-6">
+                            <label for="labelSize-weight">Height</label>
+                            <input type="number" class="form-control" name="height"
+                                [(ngModel)]="labelSizeMaster.Label_Height">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <label for="labelSize-unit">Unit</label>
+                    <input type="text" class="form-control" name="labelSize-unit"
+                        [(ngModel)]="labelSizeMaster.Label_Unit">
+
+                </div>
+                <div class="py-3 text-center">
+                    <button class="btn btn-warning " data-bs-dismiss="modal" (click)="onAddLabelSize()"
+                        *ngIf="addLabelSizeButton">Add</button>
+                    <button class="btn btn-warning" data-bs-dismiss="modal" (click)="UpdateLabelSize()"
+                        *ngIf="UpdateLabelSizeButoon">update</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--    add template Modal -->
+<div class="modal fade" id="addprinter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add print Template</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="mb-3">
+                    <label for="template-name">Name</label>
+                    <input type="text" class="form-control" name="template-name"
+                        [(ngModel)]="TemplateMaster.Label_Template_Name">
+                </div>
+                <div class="mb-3">
+                    <label for="template-description">Description</label>
+                    <textarea name="template-description" class="form-control" rows="3"
+                        [(ngModel)]="TemplateMaster.Label_Template_Description"></textarea>
+
+                </div>
+                <div class="mb-3">
+                    <label for="template-content">Content</label>
+                    <textarea name="template-content" class="form-control" rows="6"
+                        [(ngModel)]="TemplateMaster.Label_Template_Content"></textarea>
+
+                </div>
+                <div class="py-3 text-center">
+                    <button class="btn btn-warning me-3" data-bs-dismiss="modal" (click)="onAddTemplate()"
+                        *ngIf="addTemplateButoon">Add</button>
+                    <button class="btn btn-warning" (click)="UpdateTemplate()" data-bs-dismiss="modal"
+                        *ngIf="UpdateTemplateButton">update</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,207 @@
+<div class="breadcrumb-container">
+  <div class="breadcrumb-bar">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item active" aria-current="page">
+          <a (click)="navigateBack()">GRN</a>
+        </li>
+        <li class="breadcrumb-item" aria-current="page">Add</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="d-flex align-items-center gap-2">
+    <div class="aside-container">
+      <button class="all-back-button" type="button" (click)="navigateBack()">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-back-up" width="24"
+            height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round"
+            strokeLinejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M9 14l-4 -4l4 -4" />
+            <path d="M5 10h11a4 4 0 1 1 0 8h-1" />
+          </svg>
+        </span>
+        <span class="hover-text">Back</span>
+      </button>
+    </div>
+    <div class="aside-container">
+      <button class="all-button" (click)="saveStockReceive()">
+        <span>Receive</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="document-main-container">
+  <div class="form-container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3 form-group form-field-group">
+            <label>
+              <span>GRN Number</span>
+              <span class="required-field">*</span>
+            </label>
+            <div class="form-input-field" [class.form-invalid-input]="submitted && !grnDetail.GRN_Number">
+              <input type="text" class="form-control" autocomplete="off" [(ngModel)]="grnDetail.GRN_Number" />
+            </div>
+          </div>
+          <div class="col-md-3 form-group form-field-group">
+            <label>
+              <span>GRN Date</span>
+              <span class="required-field">*</span>
+            </label>
+            <div class="form-input-field" [class.form-invalid-input]="submitted && !grnDetail.GRN_Date">
+              <input type="date" class="form-control" autocomplete="off" [(ngModel)]="grnDetail.GRN_Date" />
+            </div>
+          </div>
+          <div class="col-md-3 form-group form-field-group">
+            <label><span>Purchase Order</span></label>
+            <div class="form-input-field" [class.form-invalid-input]="submitted && !grnDetail.Purchase_Order_Number">
+              <input type="text" class="form-control" autocomplete="off"
+                [(ngModel)]="grnDetail.Purchase_Order_Number" />
+            </div>
+          </div>
+          <div class="col-md-3 form-group form-field-group">
+            <label><span>Purchase Order Date</span></label>
+            <div class="form-input-field" [class.form-invalid-input]="submitted && !grnDetail.Purchase_Order_Date">
+              <input type="date" class="form-control" autocomplete="off" [(ngModel)]="grnDetail.Purchase_Order_Date" />
+            </div>
+          </div>
+          <div class="col-md-3 form-group form-field-group">
+            <label><span>Supplier</span></label>
+            <div class="form-input-field" [class.form-invalid-input]="submitted && !grnDetail.Supplier_Name">
+              <input type="text" class="form-control" autocomplete="off" [(ngModel)]="grnDetail.Supplier_Name" />
+            </div>
+          </div>
+          <div class="col-md-3 form-group form-field-group">
+            <label><span>Warehouse</span></label>
+            <div class="form-input-field" [class.form-invalid-input]="submitted && !grnDetail.Warehouse_Name">
+              <select name="warehouse" id="warehouse" class="form-select"
+                [(ngModel)]="grnDetail.Warehouse_Master_Id" (change)="getWarehouse($event)">
+                <option value=""></option>
+                <option *ngFor="let item of warehouseList" [value]="item.Warehouse_Master_Id"
+                  [innerHtml]="item.Warehouse_Name"></option>
+              </select>
+              <!-- <input type="text" class="form-control" autocomplete="off" [(ngModel)]="grnDetail.Warehouse_Name" /> -->
+            </div>
+          </div>
+          <div class="col-md-6 form-group form-field-group">
+            <label><span>Warehouse Address</span></label>
+            <div class="form-input-field" [class.form-invalid-input]="submitted && !grnDetail.Warehouse_Address">
+              <input type="text" class="form-control" autocomplete="off" [(ngModel)]="grnDetail.Warehouse_Address" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="page-sub-header mb-2">
+          <span class="title">Products</span>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col-md-2 form-group form-field-group">
+            <label>
+              <span>Material Code</span>
+              <span class="required-field">*</span>
+            </label>
+            <div class="form-input-field">
+              <select name="material-code" id="material-code" class="form-select"
+                [(ngModel)]="productDetail.Material_Master_Id" (change)="getMaterial($event)">
+                <option value=""></option>
+                <option *ngFor="let item of materialList" [value]="item.Material_Master_Id"
+                  [innerHtml]="item.Material_Code"></option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 form-group form-field-group">
+            <label>
+              <span>Material Name</span>
+              <span class="required-field">*</span>
+            </label>
+            <div class="form-input-field">
+              <input type="text" class="form-control readonly" autocomplete="off"
+                [(ngModel)]="productDetail.Material_Name" readonly />
+            </div>
+          </div>
+          <div class="col-md-2 form-group form-field-group">
+            <label>
+              <span>Price</span>
+              <span class="required-field">*</span>
+            </label>
+            <div class="form-input-field">
+              <input type="text" class="form-control" autocomplete="off" [(ngModel)]="productDetail.Base_Price" />
+            </div>
+          </div>
+          <div class="col-md-2 form-group form-field-group">
+            <label>
+              <span>Qty</span>
+              <span class="required-field">*</span>
+            </label>
+            <div class="form-input-field">
+              <input type="text" class="form-control" autocomplete="off" [(ngModel)]="productDetail.Quantity" />
+            </div>
+          </div>
+          <div class="col-md-2 form-group form-field-group align-self-end">
+            <button class="all-button outline w-100" (click)="addProductToList()">
+              <span>Add Product</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="total-table-container m-0">
+          <table>
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Material Code</th>
+                <th>Material Name</th>
+                <th>Part Number</th>
+                <th>HSN Code</th>
+                <th>Quantity</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of receivableProducts;let i=index;">
+                <td><span [innerHtml]="i+1"></span></td>
+                <td><span [innerHtml]="product.Material_Code"></span></td>
+                <td><span [innerHtml]="product.Material_Name"></span></td>
+                <td><span [innerHtml]="product.Part_Number"></span></td>
+                <td><span [innerHtml]="product.HSN_Code"></span></td>
+                <td><span [innerHtml]="product.Quantity"></span></td>
+                <td (click)="removeProduct(product.Material_Code)">
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                      <path
+                        d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+                    </svg>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="row mt-4">
+          <div class="col-md-6 form-group form-field-group">
+            <label>Terms and Condition</label>
+            <div class="form-input-field">
+              <textarea class="form-control" cols="30" rows="3" [(ngModel)]="grnDetail.Terms_Condition"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 form-group form-field-group">
+            <label>Remarks</label>
+            <div class="form-input-field">
+              <textarea class="form-control" cols="30" rows="3" [(ngModel)]="grnDetail.Remarks"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="select-main-container">
+  <div class="select-info-container">
+    <!-- code or id to store data -->
+    <input type="hidden" [(ngModel)]="allMarkModel" />
+    <!-- text to show display -->
+    <input type="text" class="select-search-input form-control" (keyup)="keyEnterSelect($event)"
+      [(ngModel)]="selectedText" (click)="openOptionList()" [class.select-required-field]="required && !selectedText"
+      [class.select-disable-filed]="disabled" [class.focus-class]="isOptionOpened" readonly
+      [placeholder]="placeholder" />
+    <!-- up arrow visible only option opened and text empty -->
+    <span *ngIf="!selectedText && isOptionOpened" class="select-up-arrow">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+      </svg>
+    </span>
+    <!-- down arrow visible disabled(true) or text empty and option not opened -->
+    <span *ngIf="!isClear || disabled || (!selectedText && !isOptionOpened)" class="select-down-arrow">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </span>
+    <!-- clear button visible isClear(true) and not disabled and text length not empty -->
+    <span *ngIf="isClear && !disabled && (selectedText?.length > 1)" class="select-clear-icon">
+      <a class="allmark-select-option" (click)="clearSelectOption()"><i class="fas fa-times-circle"></i></a>
+    </span>
+    <!-- <span *ngIf="!disabled && selectedText" class="select-clear-icon">
+          <a (click)="clearSelectOption()"><i class="fas fa-times-circle"></i></a>
+        </span> -->
+  </div>
+  <div *ngIf="isOptionOpened" class="select-option-container">
+    <div *ngIf="searchable" class="search-input-container">
+      <input type="text" [appFocus]="true" class="form-control" [(ngModel)]="searchText"
+        (keyup)="searchItem(searchText, $event)">
+    </div>
+    <div class="select-search-container">
+      <ul *ngIf="optionFilterList.length" class="select-list" role="list" (mouseenter)="onMouseEnter()"
+        (mouseleave)="onMouseLeave()">
+        <li *ngFor="let data of optionFilterList;let i=index;" role="listitem" area-selected="false">
+          <a class="allmark-select-option" (click)="optionSelected(data)" (mouseenter)="optionMouseEnter(data)"
+            (mouseleave)="optionMouseLeave(data)" [class.selected]="data.isSelected"
+            [class.activated]="data.isActive">{{data.text}}</a>
+        </li>
+      </ul>
+      <div *ngIf="!optionFilterList.length" class="select-no-data-container">
+        <span>No results found</span>
+      </div>
+    </div>
+  </div>
+</div>

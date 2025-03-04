@@ -1,0 +1,139 @@
+<div class="breadcrumb-container">
+    <div class="breadcrumb-bar">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item active" aria-current="page">
+                    <a [routerLink]="'/cargo-inward'">Inward</a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page">Import</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="aside-container"></div>
+</div>
+
+<div class="document-main-container">
+    <div class="form-container">
+
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+
+                <div class="import-container all-default-card">
+                    <div class="upload-container">
+                        <label class="choose-label-tag" for="chooseFile">
+                            <span class="icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </span>
+                            <span class="file-select-button" id="fileName">Choose file to upload</span>
+                        </label>
+
+                        <div class="selected-file-container"
+                            [class.d-block]="!uploadInitiated && importDataList?.length">
+                            <div class="selected-file-content">
+                                <span class="file-select-name" id="selected-file-name">No file chosen...</span>
+                                <span class="icon">
+                                    <a (click)="clearExcel()">Clear <i class="far fa-times-circle ms-2"></i></a>
+                                </span>
+                            </div>
+                        </div>
+
+                        <input class="display-none" type="file" name="chooseFile" id="chooseFile"
+                            (change)="onFileChoose($event)"
+                            accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+
+                        <div class="invalid-info" *ngIf="!isValidExcel && excelStatus">
+                            <span [innerHtml]="'* '+excelStatus"></span>
+                        </div>
+
+                        <div class="button-container"
+                            *ngIf="!excelStatus && !uploadInitiated && importDataList?.length">
+                            <div class="form-button-container" [ngClass]="{'button-loader-right' : validationLoader}">
+                                <button class="all-button outline" [disabled]="!isValidExcel" (click)="validateExcel()">
+                                    <span>Validate</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="validate-data-container" *ngIf="isValidateCompleted">
+                    <!-- <h4 [ngClass]="[(validationErrorCount > 0) ? 'error-header' : 'success-header']">
+    {{(validationErrorCount > 0) ? 'Found Errors':'No errors found'}}</h4> -->
+                    <div class="validate-content  all-default-card" *ngIf="(validationErrorCount > 0)">
+                        <ng-container *ngFor="let report of validationReportList;let i=index;">
+                            <div class="w-100">
+                                <a class="header" [class.error]="report.status === 'error'"
+                                    (click)="validInfoExpand(i, report.data?.length)">
+                                    <span class="header-label">{{ report.status }} </span>
+                                    <span class="message-label">{{ report.message }}</span>
+                                </a>
+                                <div class="validate-info-detail display-none" id="validate-{{i}}-info-expand">
+                                    <ng-container *ngIf="report.data?.length">
+                                        <table class="info-table">
+                                            <thead class="thead-dark">
+                                                <tr *ngFor="let titles of report.data | slice:0:1">
+                                                    <th
+                                                        *ngFor="let columnTitle of titles | keyvalue: originalOrder; let i=index">
+                                                        <ng-container>{{removeUS(columnTitle.key)}}
+                                                        </ng-container>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="report.data?.length != 0">
+                                                <tr *ngFor="let rowElement of report.data">
+                                                    <td
+                                                        *ngFor="let cell of rowElement | keyvalue: originalOrder;let i=index">
+                                                        <ng-container>{{cell.value}}</ng-container>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <div class="success-container all-default-card" *ngIf="isValidateSuccess">
+                        <div class="text-center">
+                            <span class="d-block text-success">Your Excel file ready to upload</span>
+                            <span class="count-section" [innerHtml]="'No of GRN : '+ importDataList.length"></span>
+                        </div>
+                    </div>
+
+                    <!-- <div class="progress-container all-default-card" *ngIf="uploadInitiated">
+                <div class="progress-circle" [class.over50]="isHalfUpdated()" [ngClass]="['value-'+ progressValue]">
+                    <span>{{ progressValue + ' %'}}</span>
+                    <div class="left-half-clipper">
+                        <div class="first50-bar"></div>
+                        <div class="value-bar"></div>
+                    </div>
+                </div>
+            </div> -->
+
+                    <div class="after-import-container all-default-card" *ngIf="importResponseCompleted">
+                        <div class="after-import-content">
+                            <a class="header" *ngIf="successCount">
+                                <span class="header-label">Success</span>
+                                <span class="message-label"
+                                    [innerHtml]="successCount + ' GRN imported successfully !!!'"></span>
+                            </a>
+                            <a class="header error" *ngFor="let error of uploadErrorList">
+                                <span class="header-label">Error </span>
+                                <span class="message-label" [innerHtml]="error || ''"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="isValidateSuccess" class="button-container">
+                    <button class="all-button" (click)="onImport()" [disabled]="uploadInitiated">
+                        <span>Import</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

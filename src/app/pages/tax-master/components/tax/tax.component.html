@@ -1,0 +1,77 @@
+<nav  style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb ">
+    <ol class="breadcrumb">
+    
+      <li class="breadcrumb-item active p-2 " aria-current="page" routerLink="/tax-master">Tax Master</li>
+      <li class="breadcrumb-item active p-2 " aria-current="page" >Tax </li>
+     
+    </ol>
+  </nav>
+
+  <section class="p-3">
+    <div class="row g-3">
+        <div class="col-md-3">
+            <div class="position-relative">
+                <input type="text" class="form-control" placeholder="Search PO here...">
+                <img src="../../../../../assets/icons/search (2).svg" class="position-absolute search-icon"  alt="">
+            </div>
+        </div>
+        <div class="col-md-9 d-md-flex justify-content-end align-items-center">
+          <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Add</button>
+        </div>
+    </div>
+    <div class="table-overflow">
+    <table class=" table table-striped default-table text-center mt-3">
+        <thead>
+          <tr *ngFor="let tax of taxList | slice:0:1">
+            <th *ngFor="let jObject of  tax  | keyvalue: originalOrder; let i=index">
+                <ng-container>{{removeUS(jObject.key)}} </ng-container>
+            </th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tax of  taxList; let i=index">
+            <td *ngFor="let jObject of  tax | keyvalue: originalOrder;let i=index" >
+              <ng-container>{{jObject.value}}</ng-container>
+          </td>
+          <td> <button class="btn btn-alt " (click)="onEditTax(tax)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img src="../../../../../../../assets/icons/edit-option.svg" alt="">Edit</button>
+            <button class="btn btn-alt ms-2 "(click)="deleteTax(tax)"><img src="../../../../../../../assets/icons/delete-option.svg" alt="">Delete</button></td>
+          </tr>
+        </tbody>
+    </table>
+    </div>
+
+
+  </section>
+
+
+
+  
+  <!--                   ADD Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Tax Type</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-5">
+            <div class="mb-3">
+            <label for="tax-master-name">Tax Name</label>
+            <input type="text" class="form-control"  name="tax-master-name" [(ngModel)]="taxMaster.Tax_Name">
+            </div>
+            <div class="mb3">
+                <label for="name">Tax percentage</label>
+                <input type="text" class="form-control" name="name" [(ngModel)]="taxMaster.Tax_Percentage">
+                </div>
+            <div class="p-3 text-center">
+                <button class="btn btn-warning "  data-bs-dismiss="modal" (click)="OnAddTax()" *ngIf="addButton">Add</button>
+                <button class="btn btn-warning"  (click)="UpdateTax()" *ngIf="updateButton">update</button>
+
+            </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+

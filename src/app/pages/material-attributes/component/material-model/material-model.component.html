@@ -1,0 +1,20 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Material Model</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div class="mb-3">
+        <label for="material-model-name"> Material Model</label>
+          <input type="text" class="form-control" name="material-model-name" [(ngModel)]="materialModelMaster.Material_Model">
+       </div>
+       <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch"   id="material-model-switch" [(ngModel)]="materialModelMaster.Active_Status" >
+        <label class="form-check-label" for="material-model-switch">Active</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="saveMaterialModel()" *ngIf="!materialModelMaster.Material_Model_Master_Id">Save </button>
+      <button type="button" class="btn btn-primary" (click)="updateMaterialModel()" *ngIf="materialModelMaster.Material_Model_Master_Id">Update</button>
+    </div>
+  </div>

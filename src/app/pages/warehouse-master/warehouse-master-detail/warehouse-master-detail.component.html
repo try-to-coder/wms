@@ -1,0 +1,301 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <div class="d-flex align-items-center justify-content-between w-100">
+            <div>
+                <h5 class="modal-title" id="staticBackdropLabel"
+                    [innerHtml]="warehouseID ? 'Update Warehouse' : 'Save Warehouse'"></h5>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+                <button class="all-button ms-3" (click)="saveOrUpdateWarehouse()">
+                    <span [innerHtml]="warehouseID ? 'Update' : 'Save'"></span>
+                </button>
+                <button type="button" class="all-close-button" (click)="close()">Close</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="row">
+                    <div class="col-md-12 form-group form-field-group">
+                        <label for="warehouse-code">
+                            <span>Warehouse Code</span>
+                            <span class="required-field">*</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name=" warehouse-code"
+                                [(ngModel)]="warehouseMaster.Warehouse_Code" maxlength="30">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 form-group form-field-group">
+                        <label for="warehouse-ad1">
+                            <span>Address Line 1</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehouse-ad1"
+                                [(ngModel)]="warehouseMaster.Address_Line_1" maxlength="100">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 form-group form-field-group">
+                        <label for="warehosue-ad2">
+                            <span>Address Line 2</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehosue-ad2"
+                                [(ngModel)]="warehouseMaster.Address_Line_2" maxlength="100">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 form-group form-field-group">
+                        <label for="warehouse-contactPerson">
+                            <span>Contact Person Name</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehouse-contactPerson"
+                                [(ngModel)]="warehouseMaster.Contact_Person" maxlength="100">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="warehouse-notes form-group form-field-group">
+                            <span>Notes</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <textarea name="warehouse-notes" class="form-control" cols="30" rows="6"
+                                [(ngModel)]="warehouseMaster.Notes"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-8">
+                <div class="row">
+                    <div class="col-12 col-md-6 form-group form-field-group">
+                        <label for="warehouse-name">
+                            <span>Warehouse Name</span>
+                            <span class="required-field">*</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehouse-name"
+                                [(ngModel)]="warehouseMaster.Warehouse_Name" maxlength="100">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 form-group form-field-group">
+                        <label for="warehouse-location">
+                            <span>Location</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehouse-location"
+                                [(ngModel)]="warehouseMaster.Location" maxlength="100">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 form-group form-field-group">
+                        <label for="warehouse-totalCapacity">
+                            <span>Total Capapcity</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehouse-totalCapacity"
+                                [(ngModel)]="warehouseMaster.Total_Capapcity" appNumber maxlength="30">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 col-xl-3 form-group form-field-group">
+                        <label for="warehosue-reserveCapacity">
+                            <span>Reserve Capacity</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehosue-reserveCapacity"
+                                [(ngModel)]="warehouseMaster.Reserve_Capapcity" appNumber maxlength="30">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 form-group form-field-group">
+                        <label for="warehouse-totalRacks">
+                            <span>Total no of racks</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehouse-totalRacks"
+                                [(ngModel)]="warehouseMaster.Total_Racks" maxlength="100" appNumber>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 form-group form-field-group">
+                        <label for="track">
+                            <span>Total no of racks</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="track"
+                                [(ngModel)]="warehouseMaster.Total_Racks" appNumber maxlength="30">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 form-group form-field-group">
+                        <label for="warehosue-totalBins">
+                            <span>Total no of Bins</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehosue-totalBins"
+                                [(ngModel)]="warehouseMaster.Total_Bins" appNumber maxlength="30">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 form-group form-field-group">
+                        <label for="warehouse-rackCapacity">
+                            <span>Rack Capacity</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehouse-rackCapacity"
+                                [(ngModel)]="warehouseMaster.Rack_Capacity" appNumber maxlength="30">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 form-group form-field-group">
+                        <label for="warehouse-binCapacity">
+                            <span>Bin Capacity</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehouse-binCapacity"
+                                [(ngModel)]="warehouseMaster.Bin_Capacity" appNumber maxlength="30">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-6 col-xl-3 form-group form-field-group">
+                        <label for="warehouse-tEmployee">
+                            <span>Total no of Employee</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehosue-tEmployee"
+                                [(ngModel)]="warehouseMaster.Total_Employees" appNumber maxlength="100"
+                                (keypress)="numberValidation($event,employee.value,5)" #employee>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-6 col-xl-3 form-group form-field-group">
+                        <label for="warehosue-phone">
+                            <span>Phone</span>
+                        </label>
+                        <input type="text" class="form-control" name="warehouse-phone"
+                            [(ngModel)]="warehouseMaster.Phone" appNumber maxlength="10"
+                            (keypress)="numberValidation($event,phone.value,10)" #phone>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-6 form-group form-field-group">
+                        <label for="warehouse-email">
+                            <span>Email</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="email" class="form-control" name="warehouse-email"
+                                [(ngModel)]="warehouseMaster.Email">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-6 col-xl-3 form-group form-field-group">
+                        <label for="warehouse-designation">
+                            <span>Designation</span>
+                        </label>
+                        <div class="form-input-field" data-validation-info="Enter the field">
+                            <input type="text" class="form-control" name="warehouse-designation"
+                                [(ngModel)]="warehouseMaster.Designation" maxlength="100">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 form-group form-field-group image-choose-container">
+                        <label for="warehouse-upload" class="image-container-card">
+                            <div class="image-container-image-card">
+                                <ng-container *ngIf="isWarehouseImageAvailable">
+                                    <img [src]="imageSrc" alt="Organization Image" />
+                                </ng-container>
+                                <ng-container *ngIf="!isWarehouseImageAvailable">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="icon icon-tabler icon-tabler-cloud-upload" width="28" height="28"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-1" />
+                                        <polyline points="9 15 12 12 15 15" />
+                                        <line x1="12" y1="12" x2="12" y2="21" />
+                                    </svg>
+                                    <span class="d-block w-100 text-center">Drag and drop or click to upload</span>
+                                </ng-container>
+                            </div>
+                            <div class="form-input-field" data-validation-info="Enter the field">
+                                <input type="file" accept="image/*" id="warehouse-upload" class="d-none"
+                                    (change)="onLogoChange($event)" />
+                            </div>
+                        </label>
+                        <div *ngIf="isWarehouseImageAvailable" class="image-remove-icon">
+                            <a (click)="removeWarehouseLogo()" class="d-block text-danger" style="cursor: pointer;">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash"
+                                    width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <line x1="4" y1="7" x2="20" y2="7" />
+                                    <line x1="10" y1="11" x2="10" y2="17" />
+                                    <line x1="14" y1="11" x2="14" y2="17" />
+                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- <div class="col-md-3 form-group form-field-group image-choose-container">
+    <label for="organization-image-file" class="image-container-card">
+        <div class="image-container-image-card">
+            <ng-container *ngIf="isWarehouseImageAvailable">
+                <img [src]="imageSrc" alt="Organization Image" />
+            </ng-container>
+            <ng-container *ngIf="!isWarehouseImageAvailable">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cloud-upload"
+                    width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-1" />
+                    <polyline points="9 15 12 12 15 15" />
+                    <line x1="12" y1="12" x2="12" y2="21" />
+                </svg>
+                <span class="d-block w-100 text-center">Drag and drop or click to upload</span>
+            </ng-container>
+        </div>
+        <div class="form-input-field" data-validation-info="Enter the field">
+            <input type="file" accept="image/*" id="organization-image-file" class="d-none"
+                (change)="onLogoChange($event)" />
+        </div>
+
+    </label>
+    <div *ngIf="isWarehouseImageAvailable" class="image-remove-icon">
+        <a (click)="removeWarehouseLogo()" class="d-block text-danger" style="cursor: pointer;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="20"
+                height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <line x1="4" y1="7" x2="20" y2="7" />
+                <line x1="10" y1="11" x2="10" y2="17" />
+                <line x1="14" y1="11" x2="14" y2="17" />
+                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+            </svg>
+        </a>
+    </div>
+
+</div> -->
+
+
+        </div>
+    </div>
+
+</div>

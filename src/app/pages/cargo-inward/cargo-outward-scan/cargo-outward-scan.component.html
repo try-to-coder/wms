@@ -1,0 +1,120 @@
+<div class="breadcrumb-container">
+    <div class="breadcrumb-bar">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item active" aria-current="page">
+                    <a [routerLink]="'/cargo-inward'">Outward</a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page">Scan</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="aside-container">
+        <button class="all-button me-3" [class.loader]="outwardLoader" (click)="onSaveOutward()">
+            <span>Save</span>
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </button>
+    </div>
+</div>
+
+
+<div class="document-main-container">
+    <div class="form-container">
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 col-md-8">
+                <div class="input-field-group" [class.invalid]="invalidBillMessage">
+                    <input type="text" class="form-control" placeholder="Scan bill no" [(ngModel)]="billNo"
+                        (keyup)="onBillNoScan($event, billNo)" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-scan" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M4 7v-1a2 2 0 0 1 2 -2h2" />
+                        <path d="M4 17v1a2 2 0 0 0 2 2h2" />
+                        <path d="M16 4h2a2 2 0 0 1 2 2v1" />
+                        <path d="M16 20h2a2 2 0 0 0 2 -2v-1" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                </div>
+
+                <div *ngIf="invalidBillMessage" class="invalid-field-container">
+                    <span class="text-danger" [innerHtml]="invalidBillMessage || ''"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 col-md-8">
+                <div class="input-field-group" [class.invalid]="invalidItemBarcodeMessage">
+                    <input id="bill-no-scan-field" type="text" class="form-control" placeholder="Scan item here"
+                        [(ngModel)]="itemBarcode" (keyup)="onBarcodeScan($event, itemBarcode)" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-scan" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M4 7v-1a2 2 0 0 1 2 -2h2" />
+                        <path d="M4 17v1a2 2 0 0 0 2 2h2" />
+                        <path d="M16 4h2a2 2 0 0 1 2 2v1" />
+                        <path d="M16 20h2a2 2 0 0 0 2 -2v-1" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                </div>
+
+                <div *ngIf="invalidItemBarcodeMessage" class="invalid-field-container">
+                    <span class="text-danger" [innerHtml]="invalidItemBarcodeMessage || ''"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5" *ngIf="scannedList?.length">
+            <div class="col-md-12">
+                <div class="total-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>AWB NO</th>
+                                <th>HAWB NO</th>
+                                <th>MFST PKGS</th>
+                                <th>MFST WGHT</th>
+                                <th>COMM DESC</th>
+                                <th>Barcode</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of scannedList;let i=index;">
+                                <td><span [innerHtml]="item.AWB_NO || ''"></span></td>
+                                <td><span [innerHtml]="item.HAWB_NO || ''"></span></td>
+                                <td><span [innerHtml]="item.MFST_PKGS || ''"></span></td>
+                                <td><span [innerHtml]="item.MFST_WGHT || ''"></span></td>
+                                <td><span [innerHtml]="item.COMM_DESC || ''"></span></td>
+                                <td><span [innerHtml]="item.Barcode || ''"></span></td>
+                                <td>
+                                    <a class="action-icon-button delete-icon" (click)="onDeleteScanItem(item, i)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icon-tabler-trash">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <line x1="4" y1="7" x2="20" y2="7"></line>
+                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

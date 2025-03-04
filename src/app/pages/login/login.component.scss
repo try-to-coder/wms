@@ -1,0 +1,153 @@
+.content-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+
+    .aside {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+        color: white;
+        padding: 5% 10%;
+        opacity: 0.8;
+        margin-left: 10%;
+
+        h1 {
+            font-size: 2.75rem;
+            line-height: 1.75ch;
+        }
+    }
+
+    .last {
+        color: white;
+        width: 70%;
+        padding: 5rem 0;
+    }
+}
+
+.login-alignment {
+    display: flex;
+    justify-content: center;
+}
+
+.logo-page {
+    // later you can remove
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background-image: url(../../../assets/images/background_logo.png);
+    // background-size: 100% 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.forms {
+    height: 768px;
+    top: 0px;
+    left: 892px;
+    width: 420px;
+
+    h1,
+    label,
+    input {
+        color: #001c8e;
+    }
+}
+
+.password {
+    top: 10px;
+    right: 10px;
+}
+
+.password1 {
+    top: 12px;
+    right: 10px;
+}
+
+.footer {
+    margin-top: 10%;
+}
+
+
+.login-button {
+    position: relative;
+    background-color: #001c8e;
+    font-weight: 700;
+    width: 100%;
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+
+    .spinner-border {
+        height: 1.25rem;
+        width: 1.25rem;
+        border-width: 3px;
+        position: absolute;
+        top: 8px;
+        right: 8px;
+    }
+}
+
+.login-invalid-container {
+    text-align: center;
+    color: var(--bs-danger);
+    margin-top: 0.5rem;
+}
+
+.login-container {
+    width: 400px;
+    margin-right: 20%;
+}
+
+.login-title {
+    padding: 2%;
+    text-align: center;
+}
+
+.login-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+@media only screen and (max-width: 992px) {
+    .logo-page {
+        background-size: cover;
+    }
+    .content-display {
+        display: none;
+    }
+
+    .login-container {
+        width: 400px;
+        margin: 0% 20%;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .login-alignment {
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo-page {
+        background-image: none;
+        background-color: white;
+    }
+
+    .login-container {
+        width: 400px;
+        margin: 10% 0%;
+    }
+}
+
+// .login-content-container{
+
+// }

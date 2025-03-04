@@ -1,0 +1,128 @@
+<div class="breadcrumb-container pt-3">
+    <div class="breadcrumb-bar">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb ">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item active" aria-current="page">
+                    <a [routerLink]="'/dispatch'">Dispatch</a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page">Orders</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+        <div class="aside-container">
+            <button class="all-back-button" type="button" (click)="navigateBack()">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-back-up"
+                        width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none"
+                        strokeLinecap="round" strokeLinejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M9 14l-4 -4l4 -4" />
+                        <path d="M5 10h11a4 4 0 1 1 0 8h-1" />
+                    </svg>
+                </span>
+                <span class="hover-text">Back</span>
+            </button>
+        </div>
+        <div class="aside-container">
+            <div class="input-field-container position-relative">
+                <label class="floating-label">Warehouse</label>
+                <div class="all-select-comp-container">
+                    <app-all-mark-select [data]="warehouseDropdown" [isClear]="false"
+                        [(allMarkModel)]="filterWareHouseCode" (allMarkModelChange)="onWarehouseChange($event)">
+                    </app-all-mark-select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="document-main-container">
+    <div class="form-container">
+
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <div class="table-filter-container">
+
+                    <div class="table-filter-content-container">
+                        <div class="input-field-container">
+                            <label class="floating-label">Warehouse</label>
+                            <div class="all-select-comp-container">
+                                <app-all-mark-select [data]="warehouseDropdown" [isClear]="false"
+                                    [(allMarkModel)]="filterWareHouseCode" [disabled]="!isAccessWarehouseDropdown">
+                                </app-all-mark-select>
+                            </div>
+                        </div>
+                        <div class="input-field-container input-date-container">
+                            <app-date-filter-field label="Date" floatingLabel="true" [isClear]="false"
+                                [(dateModel)]="filterDate">
+                            </app-date-filter-field>
+                        </div>
+                    </div>
+
+                    <div class="table-filter-button-container">
+                        <div class="input-field-container filter-button-container">
+                            <button class="all-filter-icon-button" [class.button-loader]="!isTableDataRetrieved"
+                                (click)="onFilterClick()">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-filter"
+                                        width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M5.5 5h13a1 1 0 0 1 .5 1.5l-5 5.5l0 7l-4 -3l0 -4l-5 -5.5a1 1 0 0 1 .5 -1.5" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="data-table-scroll-container" [class.table-spinner]="!isTableDataRetrieved"
+                    [class.hide-when-no-data]="completedPickList?.length == 0">
+
+                    <!-- Loader -->
+                    <div class="table-spinner-container">
+                        <div class="spinner-border text-success" role="status">
+                            <!-- <span class="sr-only">Loading...</span> -->
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                        <thead>
+                            <tr *ngFor="let pick of completedPickList | slice:0:1">
+                                <th *ngFor="let jObject of pick | keyvalue: originalOrder; let i=index">
+                                    <ng-container>{{removeUS(jObject.key)}}</ng-container>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pick of completedPickList; let i=index">
+                                <td *ngFor="let jObject of pick | keyvalue: originalOrder;let i=index"
+                                    (click)="onPickListRowClick(pick)">
+                                    <ng-container>{{jObject.value}}</ng-container>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div *ngIf="completedPickList?.length == 0 && isTableDataRetrieved" class="no-record-found-container">
+                    <div class="no-record-found-img-div">
+                        <img src="../../../assets/images/no-data-found.png" alt="No data found" title="No data found">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

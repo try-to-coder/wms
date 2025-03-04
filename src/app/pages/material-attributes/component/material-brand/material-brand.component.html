@@ -1,0 +1,21 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Material Brand</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body p-3">
+       <div class="mb-3">
+        <label for="material-brand-name"> Material Brand</label>
+          <input type="text" class="form-control" name="material-brand-name" [(ngModel)]="materialBrandMaster.Material_Brand">
+       </div>
+       <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch"   id="material-brand-switch" [(ngModel)]="materialBrandMaster.Active_Status" >
+        <label class="form-check-label" for="material-brand-switch">Active</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="saveMaterialBrand()" *ngIf="!materialBrandMaster.Material_Brand_Master_Id">Save</button>
+      <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  (click)="updateMaterialBrand()" *ngIf="materialBrandMaster.Material_Brand_Master_Id">Update</button>
+    </div>
+  </div>
+

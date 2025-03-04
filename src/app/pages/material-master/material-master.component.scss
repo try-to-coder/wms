@@ -1,0 +1,42 @@
+.search-icon{
+    top: 10px;
+    right: 10px;
+}
+.image-upload{
+    position: relative;
+   
+}
+.image{
+    position: absolute;
+    width: 370px;
+    height: 180px;
+    top: 23px;
+    left: 0;
+}
+input[type="file"]::-webkit-file-upload-button {
+    appearance: none;
+    display: none;
+   
+}
+input[type="file"]{
+    color: transparent;
+}
+.upload{
+    height: 180px;
+}
+
+.modal{
+    h5,span,label{
+        color: #001C8E;
+    }
+
+    .modal-header{
+        border-bottom: none;
+    }
+    input,select,textarea{
+        border: 1px solid #001C8E ;
+    }
+    .modal-content{
+        border-radius: 15px;
+    }
+}
