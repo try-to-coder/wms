@@ -1,0 +1,32 @@
+$breadcrumb-height: 72px;
+
+.breadcrumb-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    height: $breadcrumb-height;
+
+    .breadcrumb-bar {
+        position: relative;
+    }
+    .aside-bar {
+        position: relative;
+    }
+}
+
+.breadcrumb {
+    // font-size: 12px;
+    color: black;
+    font-weight: 600;
+    // padding-left: 16px;
+}
+
+.breadcrumb-item a::after {
+    padding-left: 0.75rem;
+    content: ">";
+}
+
+.breadcrumb {
+    cursor: pointer;
+}
