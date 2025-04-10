@@ -296,14 +296,14 @@ $button-radius: 4px;
 }
 
 .all-filter-icon-button {
-    height: 38px;
+    height: 36px;
     width: 50px;
     // padding: 6px 16px;
     font-size: 1rem;
     // line-height: 1.5;
     background-color: transparent;
-    color: var(--filter-button-color);
-    border: 2px solid var(--filter-button-color);
+    color: var(--app-primary-color);
+    border: 2px solid var(--app-primary-color);
     // border-color: var(--filter-button-color);
     // border-width: 2px;
     transition: all 0.5s ease-in-out;

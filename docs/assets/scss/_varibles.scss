@@ -1,12 +1,22 @@
 :root{
-    --app-primary-color: #001C8E;
+    // --app-primary-color: #001C8E;
+    // --app-primary-rgb: 0, 28, 142;
+    // --app-font-color: #ffff;
+    // --app-button-color:#FE9A2D;
+    // --app-readonly-color: rgba(0, 125, 197, 0.1);
+    // --app-page-background: #FCFDFF; // #f4f4f4;
+
+
+    // #065F89, #065
+
+
+    --app-primary-color: #065F89;
     --app-primary-rgb: 0, 28, 142;
     --app-font-color: #ffff;
-    --app-button-color:#FE9A2D;
+    --app-button-color:#065F89;
     --app-readonly-color: rgba(0, 125, 197, 0.1);
     --app-page-background: #FCFDFF; // #f4f4f4;
 
     --app-font-family:'Nunito';
-
     --bs-breadcrumb-divider: '>';
 }
